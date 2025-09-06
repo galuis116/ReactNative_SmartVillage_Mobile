@@ -1,0 +1,10 @@
+appId: ${APP_ID}
+---
+- waitForAnimationToEnd
+
+# pass expo start screen if it's visible
+- runFlow:
+    when:
+      visible:
+        text: "Development servers"
+    file: "expo-app-select.yml"

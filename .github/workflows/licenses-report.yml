@@ -1,0 +1,61 @@
+name: Licenses report
+
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - LICENSES.md
+
+jobs:
+  licenses_report:
+    runs-on: ubuntu-latest
+
+    permissions:
+      # Give the default GITHUB_TOKEN write permission to commit and push the changed files back to the repository.
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_SVA_LICENSES }}
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Generate license report as markdown
+        run: node_modules/.bin/license-checker-rseidelsohn --production --markdown --customPath license-checker.config.json --depth 0 > LICENSES_DIRECT.md
+
+      - name: Generate license report as json
+        run: node_modules/.bin/license-checker-rseidelsohn --production --json --customPath license-checker.config.json > licenses.json
+
+      - name: Cleanup licenses.json
+        run: node .github/scripts/cleanup-licenses.js
+
+      - name: Create LICENSES.md
+        run: |
+          echo "# Licenses report" > LICENSES.md
+          echo "" >> LICENSES.md
+          echo "This file contains the licenses of the dependencies used in this project." >> LICENSES.md
+          echo "" >> LICENSES.md
+          echo "To list direct dependencies in your app you can link to [LICENSES_DIRECT.md](LICENSES_DIRECT.md) at the specific screen." >> LICENSES.md
+          echo "" >> LICENSES.md
+
+      - name: Add licenses summary to LICENSES.md
+        run: node .github/scripts/license-summary.js
+
+      - name: Add licenses detail list to LICENSES.md
+        run: |
+          echo "" >> LICENSES.md
+          echo "## Licenses details" >> LICENSES.md
+          echo "" >> LICENSES.md
+          echo '```json' >> LICENSES.md
+          cat licenses.json >> LICENSES.md
+          echo "" >> LICENSES.md
+          echo '```' >> LICENSES.md
+
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Update LICENSES.md with latest dependencies information
+          file_pattern: "LICENSES.md LICENSES_DIRECT.md"

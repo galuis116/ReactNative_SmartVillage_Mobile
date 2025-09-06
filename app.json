@@ -1,0 +1,148 @@
+{
+  "expo": {
+    "name": "Smart Village App",
+    "slug": "smart-village-app",
+    "owner": "ikusei",
+    "description": "An open source React Native app for smart villages merging regional offers and services in one place - in your pocket.",
+    "githubUrl": "https://github.com/smart-village-solutions/smart-village-app-app",
+    "platforms": ["ios", "android"],
+    "version": "4.1.3",
+    "otaVersion": 1,
+    "searchVersion": "0.0.1-beta",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "20540f3a-6e82-4038-8987-adb6d97f0e75"
+      }
+    },
+    "updates": {
+      "url": "https://u.expo.dev/20540f3a-6e82-4038-8987-adb6d97f0e75"
+    },
+    "icon": "./assets/icon.png",
+    "scheme": "smart-village-app",
+    "orientation": "portrait",
+    "primaryColor": "#107821",
+    "newArchEnabled": true,
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "appleTeamId": "",
+      "bundleIdentifier": "de.dev.smartvillage.app",
+      "buildNumber": "1",
+      "supportsTablet": true,
+      "requireFullScreen": true,
+      "infoPlist": {
+        "AppStoreID": "",
+        "AppStoreCountry": "de",
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true
+        },
+        "NSCameraUsageDescription": "Diese App benötigt Zugriff auf die Kamera, um Fotos aufzunehmen und hochzuladen. Die aufgenommenen Fotos werden ausschließlich in der App für den vorgesehenen Zweck verwendet.",
+        "NSPhotoLibraryUsageDescription": "Diese App nutzt die Medienbibliothek für die Auswahl eines Profilbildes.",
+        "NSPhotoLibraryAddUsageDescription": "Diese App benötigt Zugriff, um von dir aufgenommene Fotos in deiner Medienbibliothek zu speichern.",
+        "NSLocationWhenInUseUsageDescription": "Diese App kann die Standortbestimmung nutzen, um deine aktuelle Position auf der Karte darzustellen und Inhalte nach Entfernung zu sortieren.",
+        "NSPrivacyAccessedAPITypes": [
+          {
+            "NSPrivacyAccessedAPICategory": "NSPrivacyAccessedAPICategoryDiskSpace",
+            "NSPrivacyAccessedAPIReason": "Die App benötigt Informationen über den verfügbaren Speicherplatz, um sicherzustellen, dass genügend Platz für die Ausführung von Download- und Speicheroperationen vorhanden ist."
+          },
+          {
+            "NSPrivacyAccessedAPICategory": "NSPrivacyAccessedAPICategoryFileTimestamp",
+            "NSPrivacyAccessedAPIReason": "Die App verwendet Dateizeitstempel, um die Synchronisierung von Dateien zu verwalten und sicherzustellen, dass der Nutzer immer die neuesten Dateiversionen hat."
+          }
+        ],
+        "NSMicrophoneUsageDescription": "Diese App benötigt Zugriff auf das Mikrofon, um die Kamera zu benutzen",
+        "CFBundleLocalizations": ["de"],
+        "CFBundleDevelopmentRegion": "de_DE",
+        "LSApplicationQueriesSchemes": ["whatsapp", "youtube"],
+        "LSMinimumSystemVersion": "12.0"
+      },
+      "config": {
+        "usesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "de.dev.smartvillage.app",
+      "versionCode": 1,
+      "permissions": [
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ],
+      "blockedPermissions": [
+        "FOREGROUND_SERVICE_MEDIA_PLAYBACK",
+        "READ_MEDIA_IMAGES",
+        "READ_MEDIA_VIDEO"
+      ],
+      "config": {
+        "googleMaps": {
+          "apiKey": "abcdef"
+        }
+      },
+      "allowBackup": false
+    },
+    "plugins": [
+      [
+        "expo-document-picker",
+        {
+          "appleTeamId": ""
+        }
+      ],
+      [
+        "expo-calendar",
+        {
+          "calendarPermission": "Erlauben Sie $(PRODUCT_NAME) den Zugriff auf Ihren Kalender."
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "recordAudioAndroid": false
+        }
+      ],
+      [
+        "expo-screen-orientation",
+        {
+          "initialOrientation": "PORTRAIT"
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "targetSdkVersion": 35,
+            "usesCleartextTraffic": true
+          }
+        }
+      ],
+      [
+        "expo-media-library",
+        {
+          "savePhotosPermission": "Allow $(PRODUCT_NAME) to save photos."
+        }
+      ],
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#ffffff",
+          "image": "./assets/icon.png"
+        }
+      ],
+      "@config-plugins/react-native-blob-util",
+      "@config-plugins/react-native-pdf",
+      "expo-asset",
+      "expo-font",
+      "expo-image-picker",
+      "expo-localization",
+      "expo-secure-store",
+      "expo-video",
+      "./config-plugins/withAndroidMailQueriesAndWhatsappPackage"
+    ]
+  }
+}
