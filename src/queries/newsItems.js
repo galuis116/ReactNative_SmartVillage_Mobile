@@ -7,8 +7,6 @@ export const GET_NEWS_ITEMS = gql`
     $offset: Int
     $dataProvider: String
     $dataProviderId: ID
-    $dataProviderIds: [ID]
-    $dateRange: [String]
     $excludeDataProviderIds: [ID]
     $excludeMowasRegionalKeys: [String]
     $categoryId: ID
@@ -20,8 +18,6 @@ export const GET_NEWS_ITEMS = gql`
       skip: $offset
       dataProvider: $dataProvider
       dataProviderId: $dataProviderId
-      dataProviderIds: $dataProviderIds
-      dateRange: $dateRange
       excludeDataProviderIds: $excludeDataProviderIds
       excludeMowasRegionalKeys: $excludeMowasRegionalKeys
       categoryId: $categoryId
@@ -75,8 +71,6 @@ export const GET_NEWS_ITEMS_AND_DATA_PROVIDERS = gql`
     $offset: Int
     $dataProvider: String
     $dataProviderId: ID
-    $dataProviderIds: [ID]
-    $dateRange: [String]
     $excludeDataProviderIds: [ID]
     $excludeMowasRegionalKeys: [String]
     $categoryId: ID
@@ -87,8 +81,6 @@ export const GET_NEWS_ITEMS_AND_DATA_PROVIDERS = gql`
       skip: $offset
       dataProvider: $dataProvider
       dataProviderId: $dataProviderId
-      dataProviderIds: $dataProviderIds
-      dateRange: $dateRange
       excludeDataProviderIds: $excludeDataProviderIds
       excludeMowasRegionalKeys: $excludeMowasRegionalKeys
       categoryId: $categoryId
