@@ -38,9 +38,15 @@ const useInitializeAfterOnboarding = (onboardingComplete: boolean) => {
       if (matomoActive) {
         Initializers[Initializer.MatomoTracking]();
       }
-      if (pushNotificationsActive) {
-        Initializers[Initializer.PushNotifications]();
-      }
+      
+      // Always initialize push notifications regardless of settings
+      console.log('🔔 Force initializing push notifications...');
+      Initializers[Initializer.PushNotifications]();
+      
+      // Original conditional logic (commented out)
+      // if (pushNotificationsActive) {
+      //   Initializers[Initializer.PushNotifications]();
+      // }
 
       // set orientation to "default", to allow both portrait and landscape
       ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.DEFAULT);

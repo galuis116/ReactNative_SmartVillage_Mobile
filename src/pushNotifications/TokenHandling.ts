@@ -19,6 +19,13 @@ export enum PushNotificationStorageKeys {
 export const handleIncomingToken = async (token?: string) => {
   const storedToken = await getPushTokenFromStorage();
 
+  // Add this console.log to see the token
+  console.log('🔔 Push Token Debug:', {
+    newToken: token,
+    storedToken: storedToken,
+    timestamp: new Date().toISOString()
+  });
+
   if (storedToken !== (token ?? null)) {
     let successfullyRemoved = false;
     let successfullyAdded = false;

@@ -30,6 +30,12 @@ https://coolors.co/08743c-bbbe64-222222-26798e-ffffff
 
 For detailed documentation see the [docs](./docs/INDEX.md).
 
+## Developement
+
+```
+keytool -genkeypair -v -keystore smartvillage.jks -alias smartvillage -keyalg RSA -keysize 2048 -validity 10000
+```
+
 ## Changelog
 
 Have a look at the [changelog](./CHANGELOG.md) to be up to date with the development process.

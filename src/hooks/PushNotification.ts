@@ -63,6 +63,8 @@ export const usePushNotifications = (
     notificationListener.current =
       notificationHandler &&
       Notifications.addNotificationReceivedListener((notification) => {
+        // Add this console.log to see received notifications
+        console.log('🔔 Notification Received:', notification);
         notificationHandler(notification);
       });
 
