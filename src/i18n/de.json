@@ -88,6 +88,60 @@
     "tour": "Tour",
     "eventRecord": "Veranstaltung"
   },
+  "settingsTitles": {
+    "pushNotifications": "Push-Benachrichtigungen",
+    "analytics": "Analyse",
+    "onboarding": "App-Einführung anzeigen",
+    "termsAndConditions": "Nutzungsbedingungen"
+  },
+  "settingsContents": {
+    "analytics": {
+      "no": "Nein",
+      "onActivate": "Matomo Analytics aktivieren? Dies hilft uns, die App zu verbessern. Matomo Analytics wird nach dem nächsten App-Neustart wirksam.",
+      "onActivateWithoutRestart": "Matomo Analytics aktivieren? Dies hilft uns, die App zu verbessern.",
+      "onDeactivate": "Matomo Analytics deaktivieren? Die Änderung wird nach dem nächsten App-Neustart wirksam.",
+      "yes": "Ja"
+    },
+    "ar": {
+      "setting": "AR-Einstellungen"
+    },
+    "list": {
+      "setting": "App-Design"
+    },
+    "locationService": {
+      "abort": "Abbrechen",
+      "alternativePositionHint": "Wenn der Standortdienst deaktiviert ist, wird stattdessen der alternative Standort verwendet.",
+      "cancel": "Abbrechen",
+      "chooseAlternateLocationButton": "Alternativen Standort auswählen",
+      "next": "Weiter",
+      "ok": "OK",
+      "onLocationServiceMissing": "Um diese Einstellung zu aktivieren, erteilen Sie zuerst die Standortberechtigung in den Systemeinstellungen.",
+      "onSystemPermissionMissing": "Um diese Einstellung zu aktivieren, erteilen Sie zuerst die Standortberechtigung in den Systemeinstellungen. Nach dem Aktivieren des Standortdienstes müssen Sie die App eventuell neu starten.",
+      "save": "Speichern",
+      "setting": "Standort",
+      "settings": "Einstellungen"
+    },
+    "mowasRegion": {
+      "setting": "MoWaS-Regionen"
+    },
+    "onboarding": {
+      "onActivate": "Die App-Einführung wird beim nächsten Start angezeigt.",
+      "onDeactivate": "Die App-Einführung wird beim nächsten Start nicht angezeigt.",
+      "ok": "OK"
+    },
+    "permanentFilter": {
+      "setting": "Datenquellen"
+    },
+    "termsAndConditions": {
+      "abort": "Abbrechen",
+      "onActivate": "",
+      "onDeactivate": "Beim nächsten Start wird die Zustimmung zur Datenschutzerklärung erneut abgefragt. Ohne Zustimmung zur Datenschutzerklärung kann die App nicht genutzt werden. Wir behandeln Ihre Daten stets vertraulich und mit größter Sorgfalt.",
+      "ok": "Zustimmen"
+    }
+  },
+  "settingsScreen": {
+    "intro": "Verwalten Sie App-Einstellungen und Präferenzen"
+  },
   "locationOverview": {
     "list": "Listenansicht",
     "map": "Kartenansicht"
