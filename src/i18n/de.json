@@ -23,6 +23,7 @@
   },
   "choose_language": "Sprache auswählen",
   "screenTitles": {
+    "languageSettings": "Spracheinstellung",
     "about": "Menü",
     "appSettings": "App-Einstellungen",
     "constructionSite": "Baustelle",
@@ -142,6 +143,10 @@
   },
   "settingsScreen": {
     "intro": "Verwalten Sie App-Einstellungen und Präferenzen"
+  },
+  "version": {
+    "versionInfos": "Versionsinformationen",
+    "appVersion": "App-Version"
   },
   "locationOverview": {
     "list": "Listenansicht",

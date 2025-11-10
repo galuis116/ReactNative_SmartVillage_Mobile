@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Alert, StyleSheet } from 'react-native';
+import { withTranslation } from 'react-i18next';
 
 import appJson from '../../app.json';
 import { AccessibilityContext } from '../AccessibilityProvider';
@@ -12,7 +13,7 @@ import { WrapperVertical } from './Wrapper.js';
 
 const { a11yLabel } = consts;
 
-export const VersionNumber = () => {
+export const VersionNumberComponent = ({ t }) => {
   const { isReduceTransparencyEnabled } = useContext(AccessibilityContext);
   const { globalSettings } = useContext(SettingsContext);
   const { settings = {} } = globalSettings;
@@ -20,13 +21,16 @@ export const VersionNumber = () => {
   const buildNumber =
     device.platform === 'ios' ? appJson.expo.ios.buildNumber : appJson.expo.android.versionCode;
 
+  const versionTitle = t('version.versionInfos') || a11yLabel.versionInfos;
+  const appVersionLabel = t('version.appVersion') || a11yLabel.appVersion;
+
   return (
     <WrapperVertical>
       <Touchable
         activeOpacity={0.8}
         onPress={() => {
           Alert.alert(
-            a11yLabel.versionInfos,
+            versionTitle,
             [
               `Smart Village App: ${appJson.expo.version}`,
               `Build: ${buildNumber}`,
@@ -43,14 +47,17 @@ export const VersionNumber = () => {
           smallest
           lighter
           style={[isReduceTransparencyEnabled && styles.accessibilityColor]}
-          accessibilityLabel={`${a11yLabel.appVersion} ${appJson.expo.version} ${a11yLabel.button}`}
+          accessibilityLabel={`${appVersionLabel} ${appJson.expo.version} ${a11yLabel.button}`}
         >
-          {a11yLabel.versionInfos}
+          {versionTitle}
         </RegularText>
       </Touchable>
     </WrapperVertical>
   );
 };
+
+export const VersionNumber = withTranslation()(VersionNumberComponent);
+export default VersionNumber;
 
 const styles = StyleSheet.create({
   accessibilityColor: {

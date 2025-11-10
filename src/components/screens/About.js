@@ -25,9 +25,7 @@ const AboutComponent = ({ navigation, publicJsonFile = 'about', withHomeRefresh,
   useHomeRefresh(withHomeRefresh ? refetch : undefined);
 
   const refresh = async (refetch) => {
-    if (withHomeRefresh) {
-      return;
-    }
+    if (withHomeRefresh) return;
 
     setRefreshing(true);
     isConnected && (await refetch());
@@ -51,6 +49,7 @@ const AboutComponent = ({ navigation, publicJsonFile = 'about', withHomeRefresh,
   const { headlineAboutKey, headlineAbout = texts.homeTitles.about } = sections;
   const aboutTitle = headlineAboutKey ? t(headlineAboutKey) : t('homeTitles.about');
 
+  // Add Settings route if needed
   if (withSettings && !data.find((item) => item.routeName === 'Settings')) {
     data.push({
       bottomDivider: true,
@@ -60,10 +59,28 @@ const AboutComponent = ({ navigation, publicJsonFile = 'about', withHomeRefresh,
     });
   }
 
+  // Helper to translate item titles
+  const translateItemTitle = (item) => {
+    switch (item.routeName) {
+      case 'Settings':
+        return t('screenTitles.appSettings');
+      case 'LanguageSelection':
+        return t('screenTitles.languageSettings');
+      default:
+        return item.title;
+    }
+  };
+
+  // Apply translation to each item
+  const translatedData = data.map((item) => ({
+    ...item,
+    title: translateItemTitle(item),
+  }));
+
   const sectionData = [
     {
       title: aboutTitle,
-      data
+      data: translatedData
     }
   ];
 

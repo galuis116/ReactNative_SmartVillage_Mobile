@@ -23,6 +23,7 @@
   },
   "choose_language": "Select Language",
   "screenTitles": {
+    "languageSettings": "Language Setting",
     "about": "Menu",
     "appSettings": "App Settings",
     "constructionSite": "Construction Site",
@@ -142,6 +143,10 @@
   },
   "settingsScreen": {
     "intro": "Manage app settings and preferences"
+  },
+  "version": {
+    "versionInfos": "Version information",
+    "appVersion": "App Version"
   },
   "locationOverview": {
     "list": "List View",
