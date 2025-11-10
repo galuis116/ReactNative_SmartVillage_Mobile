@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
 import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -22,6 +22,13 @@ export default function LanguageSelectionScreen({ navigation }) {
     };
     loadLanguage();
   }, []);
+
+  // Keep the header title in sync with the current translation.
+  // When the language changes, `t` will update and we set the navigation
+  // options so the top screen title updates immediately (no app reload).
+  useLayoutEffect(() => {
+    navigation.setOptions({ title: t('choose_language') });
+  }, [i18n.language, t, navigation]);
 
   const changeLanguage = async (code) => {
     setSelectedCode(code);
