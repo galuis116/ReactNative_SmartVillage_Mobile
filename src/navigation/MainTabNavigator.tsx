@@ -1,6 +1,7 @@
 /* eslint-disable complexity */
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React, { useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { LoadingSpinner } from '../components';
 import { createDynamicTabConfig, tabNavigatorConfig } from '../config/navigation/tabConfig';
@@ -81,6 +82,7 @@ const Tab = createBottomTabNavigator();
 export const MainTabNavigator = () => {
   const { loading, tabRoutes } = useTabRoutes();
   const { orientation } = useContext(OrientationContext);
+  const { t } = useTranslation();
   const isPortrait = orientation === 'portrait';
 
   const [tabConfigs, setTabConfigs] = useState<TabConfig[]>();
@@ -112,12 +114,18 @@ export const MainTabNavigator = () => {
       }}
     >
       {tabConfigs?.map((tabConfig, index) => {
+        const routeName = tabConfig.stackConfig.initialRouteName.toLowerCase();
+
         return (
           <Tab.Screen
             key={`Stack${index}`}
             name={`Stack${index}`}
             component={getStackNavigator(tabConfig.stackConfig)}
-            options={tabConfig.tabOptions}
+            options={{
+              ...tabConfig.tabOptions,
+              tabBarLabel: t(`tabs.${routeName}`),
+              tabBarAccessibilityLabel: `${t(`tabs.${routeName}`)} (Tab ${index + 1})`
+            }}
           />
         );
       })}

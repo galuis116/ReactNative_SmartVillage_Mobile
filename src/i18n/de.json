@@ -1,0 +1,77 @@
+{
+  "homeButtons": {
+    "news": "Alle Nachrichten anzeigen",
+    "events": "Alle Veranstaltungen anzeigen",
+    "pointsOfInterest": "Alle Orte und Touren anzeigen"
+  },
+  "tabs": {
+    "home": "Startseite",
+    "service": "Service",
+    "index": "Orte & Touren",
+    "events": "Veranstaltungen",
+    "about": "Über uns"
+  },
+  "homeTitles": {
+    "events": "Veranstaltungen",
+    "pointsOfInterest": "Orte & Touren",
+    "news": "Nachrichten"
+  },
+  "homeCategoriesNews": {
+    "categoryTitle": "Nachrichten",
+    "categoryTitleDetail": "Neueste Nachrichten"
+  },
+  "choose_language": "Sprache auswählen",
+  "screenTitles": {
+    "about": "Menü",
+    "appSettings": "App-Einstellungen",
+    "constructionSite": "Baustelle",
+    "consul": {
+      "login": "Anmelden",
+      "register": "Registrieren",
+      "home": "Consul"
+    },
+    "encounterHome": "Mitfahrbank",
+    "events": "Veranstaltungen",
+    "eventSuggestion": "Veranstaltungsvorschlag",
+    "favorites": "Favoriten",
+    "feedback": "Feedback",
+    "home": "Home",
+    "mapView": "Kartenansicht",
+    "myCity": "Mein Ort",
+    "profile": {
+      "home": "Profil"
+    },
+    "routePlanner": "Routenplaner bbnavi",
+    "pointsOfInterest": "Orte und Touren",
+    "search": "Suche",
+    "service": "Service",
+    "settings": "Einstellungen",
+    "sue": {
+      "mapView": "Meldungskarte",
+      "listView": "Meldungsliste",
+      "reportView": "Etwas melden"
+    },
+    "survey": "Umfrage",
+    "surveys": "Umfragen",
+    "volunteer": {
+      "calendar": "Mein Kalender",
+      "home": "Ehrenamt",
+      "me": "Persönliche Daten",
+      "groups": "Meine Gruppen und Vereine",
+      "groupsFollowing": "Gruppen und Vereine, denen ich folge",
+      "groupSearch": "Suche Inhalte",
+      "messages": "Mein Postfach",
+      "personal": "Mein Bereich",
+      "tasks": "Meine Aufgaben"
+    },
+    "voucher": {
+      "home": "TreueClub",
+      "index": "Neue Angebote",
+      "partner": "Kooperationspartner",
+      "qr": "Code scannen"
+    },
+    "wasteCollection": "Abfallkalender",
+    "languageSelection": "Sprache auswählen",
+    "weather": "Wetter"
+  }
+}

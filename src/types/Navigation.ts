@@ -6,6 +6,7 @@ import { ViewStyle } from 'react-native';
 import { Icon } from '../config';
 
 export enum ScreenName {
+  LanguageSelection = "LanguageSelection",
   About = 'About',
   ARShow = 'ARShow',
   ARInfo = 'ARInfo',

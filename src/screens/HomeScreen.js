@@ -2,6 +2,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { DeviceEventEmitter, FlatList, RefreshControl } from 'react-native';
+import { useTranslation } from 'react-i18next';
 
 import { NetworkContext } from '../NetworkProvider';
 import { SettingsContext } from '../SettingsProvider';
@@ -17,7 +18,7 @@ import {
   SafeAreaViewFlex,
   Widgets
 } from '../components';
-import { colors, consts, texts } from '../config';
+import { colors, consts } from '../config';
 import {
   graphqlFetchPolicy,
   queryVariablesFromQuery,
@@ -79,13 +80,11 @@ const renderItem = ({ item }) => {
       rootRouteName = ROOT_ROUTE_NAMES.NEWS_ITEMS
     }) => {
       const indexQueryVariables = { limit };
-
       if (indexCategoryIds?.length) {
         indexQueryVariables.categoryIds = indexCategoryIds;
       } else {
         indexQueryVariables.categoryId = categoryId;
       }
-
       return {
         name: ScreenName.Index,
         params: {
@@ -99,9 +98,7 @@ const renderItem = ({ item }) => {
     }
   };
 
-  if (!showData) {
-    return null;
-  }
+  if (!showData) return null;
 
   if (categoriesNews?.length) {
     return categoriesNews.map(
@@ -163,29 +160,32 @@ const renderItem = ({ item }) => {
 };
 
 export const HomeScreen = ({ navigation, route }) => {
+  const { t } = useTranslation();
   const { isConnected, isMainserverUp } = useContext(NetworkContext);
   const fetchPolicy = graphqlFetchPolicy({ isConnected, isMainserverUp });
   const { globalSettings } = useContext(SettingsContext);
   const { sections = {}, widgets: widgetConfigs = [], hdvt = {} } = globalSettings;
+
   const {
     showNews = true,
     showPointsOfInterestAndTours = true,
     showEvents = true,
     categoriesNews = [
       {
-        categoryTitle: texts.homeCategoriesNews.categoryTitle,
-        categoryTitleDetail: texts.homeCategoriesNews.categoryTitleDetail,
-        categoryButton: texts.homeButtons.news
+        categoryTitle: t('homeCategoriesNews.categoryTitle'),
+        categoryTitleDetail: t('homeCategoriesNews.categoryTitleDetail'),
+        categoryButton: t('homeButtons.news')
       }
     ],
-    headlinePointsOfInterestAndTours = texts.homeTitles.pointsOfInterest,
-    buttonPointsOfInterestAndTours = texts.homeButtons.pointsOfInterest,
-    headlineEvents = texts.homeTitles.events,
-    buttonEvents = texts.homeButtons.events,
+    headlinePointsOfInterestAndTours = t('homeTitles.pointsOfInterest'),
+    buttonPointsOfInterestAndTours = t('homeButtons.pointsOfInterest'),
+    headlineEvents = t('homeTitles.events'),
+    buttonEvents = t('homeButtons.events'),
     limitEvents = 15,
     limitNews = 15,
     limitPointsOfInterestAndTours = 15
   } = sections;
+
   const { events: showVolunteerEvents = false } = hdvt;
   const [refreshing, setRefreshing] = useState(false);
   const { excludeDataProviderIds, excludeMowasRegionalKeys } = usePermanentFilter();
@@ -199,7 +199,6 @@ export const HomeScreen = ({ navigation, route }) => {
       const queryVariables = queryVariablesFromQuery(query, data);
 
       if (id && name && query) {
-        // navigate to the referenced item
         navigation.navigate({
           name,
           params: {
@@ -208,12 +207,12 @@ export const HomeScreen = ({ navigation, route }) => {
             queryVariables,
             rootRouteName: rootRouteName(query),
             shareContent: null,
-            title: title || texts.detailTitles[query]
+            title: title || t(`detailTitles.${query}`)
           }
         });
       }
     },
-    [navigation]
+    [navigation, t]
   );
 
   usePushNotifications(
@@ -230,33 +229,17 @@ export const HomeScreen = ({ navigation, route }) => {
 
   const refresh = () => {
     setRefreshing(true);
-
-    // this will trigger the onRefresh functions provided to the `useHomeRefresh` hook in other
-    // components.
     DeviceEventEmitter.emit(HOME_REFRESH_EVENT);
-
-    // we simulate state change of `refreshing` with setting it to `true` first and after
-    // a timeout to `false` again, which will result in a re-rendering of the screen.
-    setTimeout(() => {
-      setRefreshing(false);
-    }, 500);
+    setTimeout(() => setRefreshing(false), 500);
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      // this will trigger the onRefresh functions provided to the `useHomeRefresh` hook in other
-      // components.
-      DeviceEventEmitter.emit(HOME_REFRESH_EVENT);
-    }, 500);
+    setTimeout(() => DeviceEventEmitter.emit(HOME_REFRESH_EVENT), 500);
   }, []);
 
   useFocusEffect(
     useCallback(() => {
-      setTimeout(() => {
-        // this will trigger the onRefresh functions provided to the `useHomeRefresh` hook in other
-        // components.
-        DeviceEventEmitter.emit(HOME_REFRESH_EVENT);
-      }, 500);
+      setTimeout(() => DeviceEventEmitter.emit(HOME_REFRESH_EVENT), 500);
     }, [])
   );
 
@@ -302,15 +285,12 @@ export const HomeScreen = ({ navigation, route }) => {
         ListHeaderComponent={
           <>
             <LiveTicker publicJsonFile="homeLiveTicker" />
-
             <ConnectedImagesCarousel
               navigation={navigation}
               publicJsonFile="homeCarousel"
               refreshTimeKey="publicJsonFile-homeCarousel"
             />
-
             <Widgets widgetConfigs={widgetConfigs} />
-
             <Disturber navigation={navigation} publicJsonFile="homeDisturber" />
           </>
         }
@@ -338,7 +318,6 @@ export const HomeScreen = ({ navigation, route }) => {
     </SafeAreaViewFlex>
   );
 };
-/* eslint-enable complexity */
 
 HomeScreen.propTypes = {
   navigation: PropTypes.object.isRequired,

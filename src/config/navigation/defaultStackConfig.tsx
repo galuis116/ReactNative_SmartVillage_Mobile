@@ -1,5 +1,6 @@
 import { CardStyleInterpolators } from '@react-navigation/stack';
 import React from 'react';
+import { t } from 'i18next'
 
 import { HeaderLeft } from '../../components';
 import { getScreenOptions } from '../../navigation/screenOptions';
@@ -103,6 +104,7 @@ import {
 import { ScreenName, StackConfig } from '../../types';
 import { consts } from '../consts';
 import { texts } from '../texts';
+import LanguageSelectionScreen from '../../screens/LanguageSelectionScreen';
 
 const { MATOMO_TRACKING } = consts;
 
@@ -122,7 +124,7 @@ export const defaultStackConfig = ({
   screenOptions: getScreenOptions({ withDrawer: isDrawer }),
   screenConfigs: [
     {
-      initialParams: initialParams || { title: texts.screenTitles.about },
+      initialParams: initialParams || { title: t('screenTitles.about') },
       routeName: ScreenName.About,
       screenComponent: AboutScreen
     },
@@ -281,7 +283,7 @@ export const defaultStackConfig = ({
     },
     {
       initialParams: initialParams || {
-        title: texts.screenTitles.events,
+        title: t('screenTitles.events'),
         query: QUERY_TYPES.EVENT_RECORDS,
         queryVariables: { limit: 15, order: 'listDate_ASC' }
       },
@@ -319,7 +321,7 @@ export const defaultStackConfig = ({
     },
     {
       initialParams: initialParams || {
-        title: texts.screenTitles.pointsOfInterest,
+        title: t('screenTitles.pointsOfInterest'),
         query: QUERY_TYPES.CATEGORIES
       },
       routeName: ScreenName.Index,
@@ -630,6 +632,11 @@ export const defaultStackConfig = ({
       initialParams: initialParams || { title: texts.screenTitles.voucher.qr },
       routeName: ScreenName.VoucherScanner,
       screenComponent: VoucherScannerScreen
+    },
+    {
+      initialParams: initialParams || { title: texts.screenTitles.languageSelection },
+      routeName: ScreenName.LanguageSelection,
+      screenComponent: LanguageSelectionScreen
     },
     {
       initialParams: initialParams || { title: texts.screenTitles.wasteCollection },

@@ -1,0 +1,77 @@
+{
+  "homeButtons": {
+    "news": "Pokaż wszystkie wiadomości",
+    "events": "Pokaż wszystkie wydarzenia",
+    "pointsOfInterest": "Pokaż wszystkie miejsca i wycieczki"
+  },
+  "tabs": {
+    "home": "Strona główna",
+    "service": "Usługi",
+    "index": "Miejsca i trasy",
+    "events": "Wydarzenia",
+    "about": "O nas"
+  },
+  "homeTitles": {
+    "events": "Wydarzenia",
+    "pointsOfInterest": "Miejsca i wycieczki",
+    "news": "Wiadomości"
+  },
+  "homeCategoriesNews": {
+    "categoryTitle": "Wiadomości",
+    "categoryTitleDetail": "Najnowsze wiadomości"
+  },
+  "choose_language": "Wybierz język",
+  "screenTitles": {
+    "about": "Menu",
+    "appSettings": "Ustawienia aplikacji",
+    "constructionSite": "Plac budowy",
+    "consul": {
+      "login": "Zaloguj się",
+      "register": "Zarejestruj się",
+      "home": "Consul"
+    },
+    "encounterHome": "Ławka autostopowa",
+    "events": "Wydarzenia",
+    "eventSuggestion": "Propozycja wydarzenia",
+    "favorites": "Ulubione",
+    "feedback": "Opinie",
+    "home": "Strona główna",
+    "mapView": "Widok mapy",
+    "myCity": "Moje miasto",
+    "profile": {
+      "home": "Profil"
+    },
+    "routePlanner": "Planer trasy bbnavi",
+    "pointsOfInterest": "Miejsca i trasy",
+    "search": "Szukaj",
+    "service": "Usługi",
+    "settings": "Ustawienia",
+    "sue": {
+      "mapView": "Mapa zgłoszeń",
+      "listView": "Lista zgłoszeń",
+      "reportView": "Zgłoś coś"
+    },
+    "survey": "Ankieta",
+    "surveys": "Ankiety",
+    "volunteer": {
+      "calendar": "Mój kalendarz",
+      "home": "Wolontariat",
+      "me": "Dane osobowe",
+      "groups": "Moje grupy i stowarzyszenia",
+      "groupsFollowing": "Grupy i stowarzyszenia, które obserwuję",
+      "groupSearch": "Wyszukaj treści",
+      "messages": "Moja skrzynka",
+      "personal": "Mój obszar",
+      "tasks": "Moje zadania"
+    },
+    "voucher": {
+      "home": "Klub Lojalnościowy",
+      "index": "Nowe oferty",
+      "partner": "Partnerzy",
+      "qr": "Skanuj kod"
+    },
+    "wasteCollection": "Kalendarz odpadów",
+    "languageSelection": "Wybierz język",
+    "weather": "Pogoda"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "homeButtons": {
+    "news": "Show all news",
+    "events": "Show all events",
+    "pointsOfInterest": "Show all locations and tours"
+  },
+  "tabs": {
+    "home": "Home",
+    "service": "Service",
+    "index": "Points of Interest",
+    "events": "Events",
+    "about": "About"
+  },
+  "homeTitles": {
+    "events": "Events",
+    "pointsOfInterest": "Points of Interest",
+    "news": "News"
+  },
+  "homeCategoriesNews": {
+    "categoryTitle": "News",
+    "categoryTitleDetail": "Latest news updates"
+  },
+  "choose_language": "Select Language",
+  "screenTitles": {
+    "about": "Menu",
+    "appSettings": "App Settings",
+    "constructionSite": "Construction Site",
+    "consul": {
+      "login": "Login",
+      "register": "Register",
+      "home": "Consul"
+    },
+    "encounterHome": "Ride Bench",
+    "events": "Events",
+    "eventSuggestion": "Event Suggestion",
+    "favorites": "Favorites",
+    "feedback": "Feedback",
+    "home": "Home",
+    "mapView": "Map View",
+    "myCity": "My City",
+    "profile": {
+      "home": "Profile"
+    },
+    "routePlanner": "Route Planner bbnavi",
+    "pointsOfInterest": "Places and Tours",
+    "search": "Search",
+    "service": "Service",
+    "settings": "Settings",
+    "sue": {
+      "mapView": "Report Map",
+      "listView": "Report List",
+      "reportView": "Submit a Report"
+    },
+    "survey": "Survey",
+    "surveys": "Surveys",
+    "volunteer": {
+      "calendar": "My Calendar",
+      "home": "Volunteering",
+      "me": "Personal Data",
+      "groups": "My Groups and Clubs",
+      "groupsFollowing": "Groups and Clubs I Follow",
+      "groupSearch": "Search Content",
+      "messages": "My Inbox",
+      "personal": "My Area",
+      "tasks": "My Tasks"
+    },
+    "voucher": {
+      "home": "Loyalty Club",
+      "index": "New Offers",
+      "partner": "Partners",
+      "qr": "Scan Code"
+    },
+    "wasteCollection": "Waste Collection",
+    "languageSelection": "Select Language",
+    "weather": "Weather"
+  }
+}

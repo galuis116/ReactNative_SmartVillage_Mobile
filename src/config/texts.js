@@ -1107,6 +1107,7 @@ export const texts = {
       qr: 'Code scannen'
     },
     wasteCollection: 'Abfallkalender',
+    languageSelection: 'LanguageSelection',
     weather: 'Wetter'
   },
   search: {

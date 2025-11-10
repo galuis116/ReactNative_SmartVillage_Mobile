@@ -37,6 +37,8 @@ import { ReactQueryProvider } from './ReactQueryProvider';
 import RootView from './RootView';
 import { initialContext, SettingsProvider } from './SettingsProvider';
 import { UnreadMessagesProvider } from './UnreadMessagesProvider';
+import { I18nextProvider } from 'react-i18next';
+import i18n, { initI18n } from './i18n';
 
 const { LIST_TYPES } = consts;
 
@@ -49,6 +51,7 @@ const MainAppWithApolloProvider = () => {
   const [initialLocationSettings, setInitialLocationSettings] = useState({});
   const [initialConversationSettings, setInitialConversationSettings] = useState({});
   const [authRetried, setAuthRetried] = useState(false);
+  const [i18nReady, setI18nReady] = useState(false);
 
   const setupApolloClient = async () => {
     // https://www.apollographql.com/docs/react/recipes/authentication/#header
@@ -139,7 +142,7 @@ const MainAppWithApolloProvider = () => {
         variables: { name: 'globalSettings', version: appJson.expo.version },
         fetchPolicy
       });
-
+      console.log('globalSettingsFromServer', response.data);
       globalSettingsData = response.data;
     } catch (error) {
       console.warn('error', error);
@@ -185,6 +188,13 @@ const MainAppWithApolloProvider = () => {
     setLoading(false);
   };
 
+  useEffect(() => {
+   (async () => {
+     await initI18n();
+     setI18nReady(true);
+   })();
+  }, []);
+
   // setup the apollo client and setup global settings after apollo client setup finished
   useEffect(() => {
     async function prepare() {
@@ -202,35 +212,37 @@ const MainAppWithApolloProvider = () => {
     !!isMainserverUp && prepare();
   }, [isMainserverUp]);
 
-  if (loading || !client) return null;
+  if (loading || !client || !i18nReady) return null;
 
   if (initialGlobalSettings.imageAspectRatio) {
     consts.IMAGE_ASPECT_RATIO = parsedImageAspectRatio(initialGlobalSettings.imageAspectRatio);
   }
 
   return (
-    <ApolloProvider client={client}>
-      <SettingsProvider
-        {...{
-          initialGlobalSettings,
-          initialListTypesSettings,
-          initialLocationSettings,
-          initialConversationSettings
-        }}
-      >
-        <ConfigurationsProvider>
-          <OnboardingManager>
-            <ProfileProvider>
-              <UnreadMessagesProvider>
-                <RootView>
-                  <Navigator navigationType={initialGlobalSettings.navigation} />
-                </RootView>
-              </UnreadMessagesProvider>
-            </ProfileProvider>
-          </OnboardingManager>
-        </ConfigurationsProvider>
-      </SettingsProvider>
-    </ApolloProvider>
+    <I18nextProvider i18n={i18n}>
+      <ApolloProvider client={client}>
+        <SettingsProvider
+          {...{
+            initialGlobalSettings,
+            initialListTypesSettings,
+            initialLocationSettings,
+            initialConversationSettings
+          }}
+        >
+          <ConfigurationsProvider>
+            <OnboardingManager>
+              <ProfileProvider>
+                <UnreadMessagesProvider>
+                  <RootView>
+                    <Navigator navigationType={initialGlobalSettings.navigation} />
+                  </RootView>
+                </UnreadMessagesProvider>
+              </ProfileProvider>
+            </OnboardingManager>
+          </ConfigurationsProvider>
+        </SettingsProvider>
+      </ApolloProvider>
+    </I18nextProvider>
   );
 };
 
