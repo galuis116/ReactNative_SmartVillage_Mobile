@@ -14,7 +14,8 @@
   "homeTitles": {
     "events": "Veranstaltungen",
     "pointsOfInterest": "Orte & Touren",
-    "news": "Nachrichten"
+    "news": "Nachrichten",
+    "about": "Über die App"
   },
   "homeCategoriesNews": {
     "categoryTitle": "Nachrichten",
@@ -84,6 +85,7 @@
   },
 "detailTitles": {
     "pointOfInterest": "Ort",
-    "tour": "Tour"
+    "tour": "Tour",
+    "eventRecord": "Veranstaltung"
 }
 }

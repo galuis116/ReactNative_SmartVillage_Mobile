@@ -14,7 +14,8 @@
   "homeTitles": {
     "events": "Wydarzenia",
     "pointsOfInterest": "Miejsca i wycieczki",
-    "news": "Wiadomości"
+    "news": "Wiadomości",
+    "about": "O aplikacji"
   },
   "homeCategoriesNews": {
     "categoryTitle": "Wiadomości",
@@ -84,6 +85,7 @@
   },
   "detailTitles": {
     "pointOfInterest": "Miejsce",
-    "tour": "Trasa"
+    "tour": "Trasa",
+    "eventRecord": "Wydarzenie"
   }
 }

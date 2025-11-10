@@ -59,7 +59,8 @@ const parseEventRecords = (data, skipLastDivider, withDate, withTime) => {
     listDate: eventRecord.listDate,
     routeName: ScreenName.Detail,
     params: {
-      title: texts.detailTitles.eventRecord,
+      titleKey: 'detailTitles.eventRecord',
+      titleFallback: texts.detailTitles.eventRecord,
       query: QUERY_TYPES.EVENT_RECORD,
       queryVariables: { id: `${eventRecord.id}` },
       rootRouteName: ROOT_ROUTE_NAMES.EVENT_RECORDS,

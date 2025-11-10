@@ -14,7 +14,8 @@
   "homeTitles": {
     "events": "Events",
     "pointsOfInterest": "Points of Interest",
-    "news": "News"
+    "news": "News",
+    "about": "About the App"
   },
   "homeCategoriesNews": {
     "categoryTitle": "News",
@@ -84,7 +85,8 @@
   },
   "detailTitles": {
     "pointOfInterest": "Place",
-    "tour": "Tour"
+    "tour": "Tour",
+    "eventRecord": "Event"
   }
 
 }
