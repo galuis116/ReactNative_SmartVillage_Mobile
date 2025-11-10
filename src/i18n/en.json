@@ -87,6 +87,9 @@
     "pointOfInterest": "Place",
     "tour": "Tour",
     "eventRecord": "Event"
+  },
+  "locationOverview": {
+    "list": "List View",
+    "map": "Map View"
   }
-
 }

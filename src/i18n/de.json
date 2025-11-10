@@ -83,9 +83,13 @@
     "4": "Burgen und Schlösser",
     "5": "Schöne Fahrradrouten"
   },
-"detailTitles": {
+  "detailTitles": {
     "pointOfInterest": "Ort",
     "tour": "Tour",
     "eventRecord": "Veranstaltung"
-}
+  },
+  "locationOverview": {
+    "list": "Listenansicht",
+    "map": "Kartenansicht"
+  }
 }
