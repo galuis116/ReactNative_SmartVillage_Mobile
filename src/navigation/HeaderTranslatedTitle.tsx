@@ -36,9 +36,8 @@ export const HeaderTranslatedTitle = ({ route }: Props) => {
   const titleFallback = route?.params?.titleFallback;
 
   const text = useMemo(() => {
-    if (titleKey) return t(titleKey);
-
-    if (typeof title === 'string') {
+    // Prefer an explicit title passed in params over a titleKey from initial params.
+    if (typeof title === 'string' && title.length) {
       // If title already is a translation key (exists in i18n), prefer that.
       try {
         // t will return the key unchanged if missing; use that behavior to detect existence
@@ -55,6 +54,8 @@ export const HeaderTranslatedTitle = ({ route }: Props) => {
       // Nothing matched: use the provided string directly.
       return title;
     }
+
+    if (titleKey) return t(titleKey);
 
     if (titleFallback) return titleFallback;
 

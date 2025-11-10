@@ -120,16 +120,20 @@ const renderItem = ({ item }) => {
             categoryId,
             fetchPolicy,
             navigation,
-            navigate: () =>
-              navigation.navigate(
-                NAVIGATION.NEWS_ITEMS_INDEX({
-                  categoryId,
-                  title,
-                  titleDetail,
-                  indexCategoryIds,
-                  rootRouteName
-                })
-              ),
+            navigate: () => {
+              const navObj = NAVIGATION.NEWS_ITEMS_INDEX({
+                categoryId,
+                title,
+                titleDetail,
+                indexCategoryIds,
+                rootRouteName
+              });
+              // use push for Index to ensure a fresh route with the correct params
+              if (navigation?.push && navObj?.name === ScreenName.Index) {
+                return navigation.push(navObj.name, navObj.params);
+              }
+              return navigation.navigate(navObj);
+            },
             placeholder: <NewsSectionPlaceholder navigation={navigation} title={title} />,
             query,
             queryVariables: { ...queryVariables, categoryId },
@@ -143,12 +147,18 @@ const renderItem = ({ item }) => {
   }
 
   return (
-    <HomeSection
+        <HomeSection
       {...{
         buttonTitle,
         fetchPolicy,
         isIndexStartingAt1: false,
-        navigate: () => navigation.navigate(NAVIGATION[navigate]),
+        navigate: () => {
+          const navObj = NAVIGATION[navigate];
+          if (navigation?.push && navObj?.name === ScreenName.Index) {
+            return navigation.push(navObj.name, navObj.params);
+          }
+          return navigation.navigate(navObj);
+        },
         navigation,
         query,
         queryVariables,

@@ -3,9 +3,10 @@ import React, { useContext } from 'react';
 import { View } from 'react-native';
 
 import { texts } from '../config';
+import { ScreenName } from '../types';
+import { getTitleForQuery } from '../helpers';
 import { useHomeRefresh, useStaticContent } from '../hooks';
 import { SettingsContext } from '../SettingsProvider';
-import { ScreenName } from '../types';
 
 import { Button } from './Button';
 import { SectionHeader } from './SectionHeader';
@@ -19,6 +20,7 @@ type TButton = {
 
 export const HomeButtons = ({ publicJsonFile }: { publicJsonFile: string }) => {
   const navigation = useNavigation();
+  const nav: any = navigation;
   const { globalSettings } = useContext(SettingsContext);
 
   const { data, loading, refetch } = useStaticContent<TButton[]>({
@@ -41,7 +43,20 @@ export const HomeButtons = ({ publicJsonFile }: { publicJsonFile: string }) => {
         {data?.map((item, index) => (
           <Button
             key={`${item.title}-${index}`}
-            onPress={() => navigation.navigate(item.routeName, item.params)}
+            onPress={() => {
+              const params = item.params || {};
+
+              // If navigating to the Index screen, ensure a fresh route and a sensible title
+              if (item.routeName === ScreenName.Index) {
+                const title = params.title ?? getTitleForQuery(params.query);
+                if (nav?.push) {
+                  return nav.push(item.routeName, { ...params, title });
+                }
+                return nav.navigate(item.routeName, { ...params, title });
+              }
+
+              return nav.navigate(item.routeName, params);
+            }}
             title={item.title}
           />
         ))}
