@@ -92,7 +92,8 @@
     "pushNotifications": "Powiadomienia push",
     "analytics": "Analityka",
     "onboarding": "Pokaż wprowadzenie do aplikacji",
-    "termsAndConditions": "Regulamin"
+    "termsAndConditions": "Regulamin",
+    "locationService": "Usługa lokalizacji"
   },
   "settingsContents": {
     "analytics": {

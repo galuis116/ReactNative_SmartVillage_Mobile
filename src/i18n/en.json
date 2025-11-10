@@ -92,7 +92,8 @@
     "pushNotifications": "Push Notifications",
     "analytics": "Analytics",
     "onboarding": "Show App Introduction",
-    "termsAndConditions": "Terms and Conditions"
+    "termsAndConditions": "Terms and Conditions",
+    "locationService": "Location Service"
   },
   "settingsContents": {
     "analytics": {

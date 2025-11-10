@@ -92,7 +92,8 @@
     "pushNotifications": "Push-Benachrichtigungen",
     "analytics": "Analyse",
     "onboarding": "App-Einführung anzeigen",
-    "termsAndConditions": "Nutzungsbedingungen"
+    "termsAndConditions": "Nutzungsbedingungen",
+    "locationService": "Standortdienst"
   },
   "settingsContents": {
     "analytics": {
