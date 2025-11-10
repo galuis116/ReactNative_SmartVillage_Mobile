@@ -19,6 +19,7 @@ export const DataProviderNotice = ({ dataProvider, openWebScreen }) => {
 };
 
 DataProviderNotice.propTypes = {
-  dataProvider: PropTypes.object.isRequired,
+  // dataProvider can be undefined when there is no provider notice to show
+  dataProvider: PropTypes.object,
   openWebScreen: PropTypes.func.isRequired
 };
