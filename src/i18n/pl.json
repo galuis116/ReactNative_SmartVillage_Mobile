@@ -73,5 +73,17 @@
     "wasteCollection": "Kalendarz odpadów",
     "languageSelection": "Wybierz język",
     "weather": "Pogoda"
+  },
+  "categoryTitles": {
+    "places": "Miejsca",
+    "tours": "Trasy"
+  },
+  "categories": {
+    "4": "Zamki i pałace",
+    "5": "Piękne trasy rowerowe"
+  },
+  "detailTitles": {
+    "pointOfInterest": "Miejsce",
+    "tour": "Trasa"
   }
 }

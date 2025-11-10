@@ -73,5 +73,17 @@
     "wasteCollection": "Abfallkalender",
     "languageSelection": "Sprache auswählen",
     "weather": "Wetter"
-  }
+  },
+  "categoryTitles": {
+    "places": "Orte",
+    "tours": "Touren"
+  },
+  "categories": {
+    "4": "Burgen und Schlösser",
+    "5": "Schöne Fahrradrouten"
+  },
+"detailTitles": {
+    "pointOfInterest": "Ort",
+    "tour": "Tour"
+}
 }

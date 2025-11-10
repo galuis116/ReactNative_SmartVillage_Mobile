@@ -1,6 +1,7 @@
 import _upperFirst from 'lodash/upperFirst';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { withTranslation } from 'react-i18next';
 import { StyleSheet } from 'react-native';
 import { Badge, ListItem } from 'react-native-elements';
 
@@ -9,9 +10,9 @@ import { colors, consts, Icon, normalize } from '../config';
 import { BoldText, RegularText } from './Text';
 import { Touchable } from './Touchable';
 
-export class CategoryListItem extends React.PureComponent {
+class CategoryListItem extends React.PureComponent {
   render() {
-    const { categoryTitles, index, item, navigation, noSubtitle = false, section } = this.props;
+    const { categoryTitles, index, item, navigation, noSubtitle = false, section, t } = this.props;
     const {
       bottomDivider,
       iconName,
@@ -28,7 +29,7 @@ export class CategoryListItem extends React.PureComponent {
       section.title === categoryTitlesPointsOfInterest ? pointsOfInterestTreeCount : toursTreeCount;
 
     const SelectedIcon = iconName ? Icon[_upperFirst(iconName)] : undefined;
-
+    console.log(`Rendering CategoryListItem: ${title} with count: ${count}`);
     return (
       <ListItem
         bottomDivider={
@@ -40,16 +41,23 @@ export class CategoryListItem extends React.PureComponent {
         }
         topDivider={topDivider !== undefined ? topDivider : false}
         containerStyle={styles.container}
-        onPress={() => navigation.push(name, params)}
+        onPress={() => {
+          const updatedParams = {
+            ...params,
+            titleKey: item.titleKey || params.titleKey,
+            titleFallback: title
+          };
+          navigation.push(name, updatedParams);
+        }}
         delayPressIn={0}
         Component={Touchable}
-        accessibilityLabel={`(${title}) ${consts.a11yLabel.poiCount} ${count} ${consts.a11yLabel.button}`}
+        accessibilityLabel={`(${item.titleKey ? t(item.titleKey) : title}) ${consts.a11yLabel.poiCount} ${count} ${consts.a11yLabel.button}`}
       >
         {!!SelectedIcon && <SelectedIcon color={colors.darkText} />}
 
         <ListItem.Content>
           {noSubtitle || !subtitle ? null : <RegularText small>{subtitle}</RegularText>}
-          <BoldText noSubtitle={noSubtitle}>{title}</BoldText>
+          <BoldText noSubtitle={noSubtitle}>{item.titleKey ? t(item.titleKey) : title}</BoldText>
         </ListItem.Content>
 
         <Badge value={count} badgeStyle={styles.badge} textStyle={styles.badgeText} />
@@ -85,5 +93,8 @@ CategoryListItem.propTypes = {
   item: PropTypes.object.isRequired,
   navigation: PropTypes.object.isRequired,
   noSubtitle: PropTypes.bool,
-  section: PropTypes.object.isRequired
+  section: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired
 };
+
+export default withTranslation()(CategoryListItem);
