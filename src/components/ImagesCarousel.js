@@ -60,7 +60,7 @@ export const ImagesCarousel = ({
     refreshTime
   });
   const itemWidth = imageWidth();
-
+  console.log('ImageCarousel',data);
   const renderItem = useCallback(
     ({ item, refreshInterval }) => {
       const { routeName: name, params } = item.picture || {};
@@ -121,7 +121,10 @@ export const ImagesCarousel = ({
           message={item.message}
           navigation={navigation}
           refreshInterval={item.refreshInterval || refreshInterval}
-          source={item.picture}
+          source={{
+            uri: item.picture.sourceUrl.url,   // <-- map to uri
+            captionText: item.picture.captionText,
+            copyright: item.picture.copyright,}}
         />
       );
     },

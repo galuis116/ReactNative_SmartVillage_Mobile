@@ -80,8 +80,8 @@ export const ConfigurationsProvider = ({ children }: { children?: ReactNode }) =
   const { data: resourceFiltersData } = useQueryWithApollo(getQuery(QUERY_TYPES.RESOURCE_FILTERS), {
     fetchPolicy: 'network-only'
   });
-console.log('resourceFiltersData', resourceFiltersData);
-console.log('defaultResourceFiltersConfig', eventResourceFiltersConfig);
+// console.log('resourceFiltersData', resourceFiltersData);
+// console.log('defaultResourceFiltersConfig', eventResourceFiltersConfig);
   const mergedConfig = useMemo(() => {
   const isSueConfigEmpty = !Object.keys(sue).length;
   const isResourceFiltersEmpty = !resourceFiltersData?.resourceFilters?.length;
@@ -103,7 +103,7 @@ console.log('defaultResourceFiltersConfig', eventResourceFiltersConfig);
     sueConfig: { ...sue, ...sueConfigData, sueProgress }
   });
 }, [sueConfigData, sueProgress, resourceFiltersData]);
-console.log('mergedConfig.resourceFilters', mergedConfig.resourceFilters);
+// console.log('mergedConfig.resourceFilters', mergedConfig.resourceFilters);
 
   const reloadCallback = useCallback(async () => {
     setIsLoading(true);
