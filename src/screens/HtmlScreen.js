@@ -85,6 +85,6 @@ export const HtmlScreen = ({ navigation, route }) => {
 };
 
 HtmlScreen.propTypes = {
-  navigation: PropTypes.object.isRequired,
+  navigation: PropTypes.object,
   route: PropTypes.object.isRequired
 };

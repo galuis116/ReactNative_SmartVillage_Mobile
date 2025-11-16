@@ -28,8 +28,8 @@ export const texts = {
     }
   },
   appIntro: {
-    continue: 'Weiter',
-    skip: 'Überspringen'
+    continue: 'Continue',
+    skip: 'Skip'
   },
   augmentedReality: {
     arInfoScreen: {
@@ -1003,8 +1003,8 @@ export const texts = {
     passwordLengthError: 'Das Passwort sollte mindestens 8 Zeichen lang sein',
     postcode: 'Postleitzahl',
     postcodeMinLength: 'Postleitzahl muss mindestens 5 Zeichen lang sein',
-    privacyChecked: 'Mit der Registrierung akzeptieren Sie die ',
-    privacyCheckLink: 'Datenschutzbestimmungen',
+    privacyChecked: 'By registering, you accept … ',
+    privacyCheckLink: 'Privacy Policy',
     privacyCheckRequireBody: 'Bitte bestätigen Sie die Datenschutzbestimmungen.',
     privacyCheckRequireTitle: 'Hinweis',
     register: 'Registrieren',
@@ -1043,10 +1043,10 @@ export const texts = {
     termsOfUseLink: 'Nutzungsbedingungen',
     termsOfUseCheckRequireBody: 'Bitte bestätigen Sie die Nutzungsbedingungen.',
     termsOfUseCheckRequireTitle: 'Hinweis',
-    termsAndConditionsAlertTitle: 'Hinweis',
+    termsAndConditionsAlertTitle: 'Notice',
     termsAndConditionsAlertMessage:
-      'Ohne die Bestätigung unserer Datenschutzhinweise können Sie die App leider nicht nutzen. Wir behandeln Ihre Daten dabei stets vertraulich und mit höchster Sorgfalt. Falls Sie die App nutzen möchten, folgen Sie bitte dem Button.',
-    termsAndConditionsAlertOk: 'Zur Bestätigung'
+      'Without confirming our privacy notice, you unfortunately cannot use the app. We always handle your data confidentially and with the utmost care. If you would like to use the app, please follow the button.',
+    termsAndConditionsAlertOk: 'Confirm'
   },
   pushNotifications: {
     abort: 'Abbrechen',
