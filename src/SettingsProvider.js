@@ -7,48 +7,12 @@ export const initialContext = {
     hdvt: {},
     navigation: 'tab',
     sections: {},
-    settings: {
-      pushNotifications: true,
-      locationService: true,
-      matomo: true,
-      onboarding: true,
-      wasteAddresses: {
-        hasCalendar: true,
-        hasExport: true,
-        hasHeaderSearchBarOption: false,
-        twoStep: false,
-        texts: {
-          hintStreet: 'Enter street name',
-          hintCityAndStreet: 'Enter city and street',
-          calendarIntro: 'Here are upcoming collection days',
-          exportButton: 'Export schedule'
-        }
-      }
-    },
-    waste: {
-      streetId: 'street-12345',
-    // optional: keys must match the type keys returned by the waste types hook
-      selectedTypeKeys: ['paper', 'organic', 'residual']
-    },
+    settings: {},
+    waste: {},
     whistleblow: {},
-    widgets: [{ widgetName: 'event', text: 'Events', additionalProps: { limit: 5 } },
-      {
-      widgetName: 'constructionSiteNews',
-      text: 'News',
-      additionalProps: {  image: 'https://picsum.photos/120/80' }
-    },
-    {
-      widgetName: 'lunch',
-      text: 'Lunch Menu',
-      additionalProps: { image: 'https://picsum.photos/120/80' }
-    },
-    {
-      widgetName: 'weather',
-      text: 'Weather',
-      additionalProps: { image: 'https://picsum.photos/120/80' }
-    }
-    ]
+    widgets: []
   },
+   
   listTypesSettings: {},
   locationSettings: {},
   conversationSettings: {}

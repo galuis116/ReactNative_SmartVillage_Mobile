@@ -324,7 +324,7 @@ export const AppIntroScreen = ({
   });
 
   let slides = data;
-  console.log('slides', slides);
+  // console.log('slides', slides);
   
   if (onlyTermsAndConditions) {
     slides =
