@@ -60,7 +60,7 @@ export const ImagesCarousel = ({
     refreshTime
   });
   const itemWidth = imageWidth();
-  console.log('ImageCarousel',data);
+  // console.log('ImageCarousel',data);
   const renderItem = useCallback(
     ({ item, refreshInterval }) => {
       const { routeName: name, params } = item.picture || {};

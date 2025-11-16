@@ -23,7 +23,7 @@ export const WeatherWidget = ({ text }: WidgetProps) => {
     fetchPolicy === 'network-only'
       ? { fetchPolicy, pollInterval: POLL_INTERVALS.WEATHER }
       : { fetchPolicy };
-  const { data, refetch } = useQuery(getQuery(QUERY_TYPES.WEATHER_MAP_CURRENT), queryVariables);
+  const { data, refetch } = useQuery(getQuery(QUERY_TYPES.WEATHER_MAP), queryVariables);
 
   const icon = data?.weatherMap?.current?.weather?.[0]?.icon ?? '02d';
   const description = data?.weatherMap?.current?.weather?.[0]?.description;

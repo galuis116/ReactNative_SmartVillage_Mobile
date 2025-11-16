@@ -31,7 +31,23 @@ export const initialContext = {
       selectedTypeKeys: ['paper', 'organic', 'residual']
     },
     whistleblow: {},
-    widgets: []
+    widgets: [{ widgetName: 'event', text: 'Events', additionalProps: { limit: 5 } },
+      {
+      widgetName: 'constructionSiteNews',
+      text: 'News',
+      additionalProps: {  image: 'https://picsum.photos/120/80' }
+    },
+    {
+      widgetName: 'lunch',
+      text: 'Lunch Menu',
+      additionalProps: { image: 'https://picsum.photos/120/80' }
+    },
+    {
+      widgetName: 'weather',
+      text: 'Weather',
+      additionalProps: { image: 'https://picsum.photos/120/80' }
+    }
+    ]
   },
   listTypesSettings: {},
   locationSettings: {},
