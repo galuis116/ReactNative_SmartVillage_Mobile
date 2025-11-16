@@ -11,9 +11,25 @@ export const initialContext = {
       pushNotifications: true,
       locationService: true,
       matomo: true,
-      onboarding: false
+      onboarding: true,
+      wasteAddresses: {
+        hasCalendar: true,
+        hasExport: true,
+        hasHeaderSearchBarOption: false,
+        twoStep: false,
+        texts: {
+          hintStreet: 'Enter street name',
+          hintCityAndStreet: 'Enter city and street',
+          calendarIntro: 'Here are upcoming collection days',
+          exportButton: 'Export schedule'
+        }
+      }
     },
-    waste: {},
+    waste: {
+      streetId: 'street-12345',
+    // optional: keys must match the type keys returned by the waste types hook
+      selectedTypeKeys: ['paper', 'organic', 'residual']
+    },
     whistleblow: {},
     widgets: []
   },

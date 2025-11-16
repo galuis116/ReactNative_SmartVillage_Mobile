@@ -36,11 +36,17 @@ export const HeaderTranslatedTitle = ({ route }: Props) => {
   const titleFallback = route?.params?.titleFallback;
 
   const text = useMemo(() => {
-    // Prefer an explicit title passed in params over a titleKey from initial params.
-    if (typeof title === 'string' && title.length) {
+    // If a title fallback is provided (usually from initialParams), and the explicit
+    // `title` equals that fallback, prefer the `titleKey` so the header can be
+    // translated dynamically (e.g. category keys like `categories.4`).
+    // Otherwise, prefer an explicit `title` passed in params.
+
+    const hasTitle = typeof title === 'string' && title.length;
+    const isFallbackTitle = hasTitle && titleFallback && title === titleFallback;
+
+    if (hasTitle && !isFallbackTitle) {
       // If title already is a translation key (exists in i18n), prefer that.
       try {
-        // t will return the key unchanged if missing; use that behavior to detect existence
         const translated = t(title);
         if (translated !== title) return translated;
       } catch (e) {
