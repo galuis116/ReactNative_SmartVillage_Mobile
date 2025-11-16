@@ -18,7 +18,7 @@ export const ServiceTiles = ({
   hasDiagonalGradientBackground,
   html,
   image,
-  isEditMode,
+  isEditMode = true,
   query,
   staticJsonName,
   title
@@ -57,10 +57,11 @@ export const ServiceTiles = ({
 
   const contentForAbove = html || htmlContent?.forAbove;
   const contentForBelow = htmlContent?.forBelow;
-
+  console.log('ServiceTiles data', data);
+  console.log('isEditMode', isEditMode);
   return (
     <SafeAreaViewFlex>
-      {isEditMode ? (
+      {!isEditMode ? (
         <Service
           data={data}
           isEditMode
