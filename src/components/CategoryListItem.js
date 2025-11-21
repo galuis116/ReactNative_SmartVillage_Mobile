@@ -13,7 +13,7 @@ import { Touchable } from './Touchable';
 class CategoryListItem extends React.PureComponent {
   render() {
     const { categoryTitles, index, item, navigation, noSubtitle = false, section, t } = this.props;
-    console.log('CategoryListItem props:', { categoryTitles, index, item, section, noSubtitle, navigation, });
+    // console.log('CategoryListItem props:', { categoryTitles, index, item, section, noSubtitle, navigation, });
     const {
       bottomDivider,
       iconName,
