@@ -30,7 +30,7 @@ export const LiveTicker = ({ publicJsonFile }: Props) => {
   });
 
   useHomeRefresh(refetch);
-
+  // console.log('LiveTicker data',data);
   if (!data?.text?.length) return null;
 
   const {

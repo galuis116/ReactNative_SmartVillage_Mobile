@@ -189,7 +189,7 @@ const TermsAndConditionsSection = ({
     <View style={{ position: 'absolute', bottom: normalize(180), width: '100%' }}>
       <Wrapper>
         <Checkbox
-          containerStyle={[styles.leftAligned, { backgroundColor }]}
+          containerStyle={{...styles.leftAligned,  backgroundColor }}
           boldTitle={false}
           center={false}
           checked={hasAcceptedDataPrivacy}
@@ -247,7 +247,7 @@ type Props = {
   setOnboardingComplete: () => void;
 };
 
-const renderSlide: ListRenderItem<AppIntroSlide> = ({
+const renderSlide = ({
   backgroundColor,
   item,
   setShowButtonTermsAndConditions
@@ -324,7 +324,8 @@ export const AppIntroScreen = ({
   });
 
   let slides = data;
-
+  // console.log('slides', slides);
+  
   if (onlyTermsAndConditions) {
     slides =
       slides?.filter((slide) => slide.onLeaveSlideName === Initializer.TermsAndConditions) || [];
@@ -334,15 +335,15 @@ export const AppIntroScreen = ({
     (slide) => slide.onLeaveSlideName === Initializer.TermsAndConditions
   );
 
-  const renderItem = ({ item }) =>
-    renderSlide({
-      backgroundColor,
-      item,
-      setShowButtonTermsAndConditions: (value) => {
-        setShowDoneButtonTermsAndConditions(value);
-        setHasAcceptedTerms(value);
-      }
-    });
+ const renderItem = ({ item }) =>
+  renderSlide({
+    backgroundColor,
+    item,
+    setShowButtonTermsAndConditions: (value) => {
+      setShowDoneButtonTermsAndConditions(value)
+      setHasAcceptedTerms(value)
+    }
+  });
 
   useEffect(() => {
     if (error || (!loading && !slides?.length)) {
@@ -363,7 +364,7 @@ export const AppIntroScreen = ({
   }
 
   return (
-    <SafeAreaViewFlex style={[styles.background, { backgroundColor }]}>
+    <SafeAreaViewFlex style={{...styles.background,  backgroundColor }}>
       <StatusBar style="dark" translucent backgroundColor="transparent" />
       <AppIntroSlider<AppIntroSlide>
         activeDotStyle={onlyTermsAndConditions ? styles.hiddenDot : styles.activeDot}

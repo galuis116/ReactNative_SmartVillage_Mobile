@@ -1,6 +1,7 @@
 import { isARSupportedOnDevice } from '@reactvision/react-viro';
 import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
+import { withTranslation } from 'react-i18next';
 import { ActivityIndicator, Alert, SectionList, StyleSheet } from 'react-native';
 
 import {
@@ -54,7 +55,7 @@ export const SETTINGS_SCREENS = {
 };
 
 /* eslint-disable complexity */
-const renderItem = ({ item, navigation, listsWithoutArrows, settingsScreenListItemTitles }) => {
+const renderItem = ({ item, navigation, listsWithoutArrows, settingsScreenListItemTitles, t }) => {
   let component;
   const title = settingsScreenListItemTitles[item];
 
@@ -63,9 +64,9 @@ const renderItem = ({ item, navigation, listsWithoutArrows, settingsScreenListIt
       <TextListItem
         item={{
           isHeadlineTitle: false,
-          params: { setting: item, title: title || texts.settingsContents.locationService.setting },
+          params: { setting: item, title: title || t('settingsContents.locationService.setting') },
           routeName: ScreenName.Settings,
-          title: title || texts.settingsContents.locationService.setting,
+          title: title || t('settingsContents.locationService.setting'),
           topDivider: true
         }}
         listsWithoutArrows={listsWithoutArrows}
@@ -77,9 +78,9 @@ const renderItem = ({ item, navigation, listsWithoutArrows, settingsScreenListIt
       <TextListItem
         item={{
           isHeadlineTitle: false,
-          params: { setting: item, title: title || texts.settingsContents.permanentFilter.setting },
+          params: { setting: item, title: title || t('settingsContents.permanentFilter.setting') },
           routeName: ScreenName.Settings,
-          title: title || texts.settingsContents.permanentFilter.setting
+          title: title || t('settingsContents.permanentFilter.setting')
         }}
         listsWithoutArrows={listsWithoutArrows}
         navigation={navigation}
@@ -90,9 +91,9 @@ const renderItem = ({ item, navigation, listsWithoutArrows, settingsScreenListIt
       <TextListItem
         item={{
           isHeadlineTitle: false,
-          params: { setting: item, title: title || texts.settingsContents.mowasRegion.setting },
+          params: { setting: item, title: title || t('settingsContents.mowasRegion.setting') },
           routeName: ScreenName.Settings,
-          title: title || texts.settingsContents.mowasRegion.setting
+          title: title || t('settingsContents.mowasRegion.setting')
         }}
         listsWithoutArrows={listsWithoutArrows}
         navigation={navigation}
@@ -103,9 +104,9 @@ const renderItem = ({ item, navigation, listsWithoutArrows, settingsScreenListIt
       <TextListItem
         item={{
           isHeadlineTitle: false,
-          params: { setting: item, title: title || texts.settingsContents.list.setting },
+          params: { setting: item, title: title || t('settingsContents.list.setting') },
           routeName: ScreenName.Settings,
-          title: title || texts.settingsContents.list.setting
+          title: title || t('settingsContents.list.setting')
         }}
         listsWithoutArrows={listsWithoutArrows}
         navigation={navigation}
@@ -116,9 +117,9 @@ const renderItem = ({ item, navigation, listsWithoutArrows, settingsScreenListIt
       <TextListItem
         item={{
           isHeadlineTitle: false,
-          params: { setting: item, title: title || texts.settingsContents.ar.setting },
+          params: { setting: item, title: title || t('settingsContents.ar.setting') },
           routeName: ScreenName.Settings,
-          title: title || texts.settingsContents.ar.setting
+          title: title || t('settingsContents.ar.setting')
         }}
         listsWithoutArrows={listsWithoutArrows}
         navigation={navigation}
@@ -172,7 +173,7 @@ const onDeactivatePushNotifications = (revert) => {
     });
 };
 
-export const SettingsScreen = ({ navigation, route }) => {
+const SettingsScreenComponent = ({ navigation, route, t }) => {
   const { globalSettings } = useContext(SettingsContext);
   const { mowas, settings = {} } = globalSettings;
   const { listsWithoutArrows = false, settingsScreenListItemTitles = {} } = settings;
@@ -184,188 +185,198 @@ export const SettingsScreen = ({ navigation, route }) => {
   useEffect(() => {
     /* eslint-disable complexity */
     const updateData = async () => {
-      const settingsList = [];
+      try {
+        const settingsList = [];
+        console.log('SettingsScreen.updateData: global settings =', globalSettings);
 
-      // add push notification option if they are enabled
-      if (settings.pushNotifications !== false) {
-        const pushPermission = await readFromStore(PushNotificationStorageKeys.IN_APP_PERMISSION);
+        // add push notification option if they are enabled
+        if (settings.pushNotifications !== false) {
+          const pushPermission = await readFromStore(PushNotificationStorageKeys.IN_APP_PERMISSION);
 
-        settingsList.push({
-          data: [
-            {
-              title:
-                settingsScreenListItemTitles.pushNotifications ||
-                texts.settingsTitles.pushNotifications,
-              topDivider: false,
-              value: pushPermission,
-              onActivate: onActivatePushNotifications,
-              onDeactivate: onDeactivatePushNotifications
-            }
-          ]
-        });
-      }
-
-      // settings should sometimes contain matomo analytics next, depending on server settings
-      if (settings.matomo) {
-        const { consent: matomoValue } = await matomoSettings();
-
-        settingsList.push({
-          data: [
-            {
-              title: settingsScreenListItemTitles.matomo || texts.settingsTitles.analytics,
-              topDivider: true,
-              value: matomoValue,
-              onActivate: (revert) =>
-                Alert.alert(
-                  texts.settingsTitles.analytics,
-                  texts.settingsContents.analytics.onActivate,
-                  [
-                    {
-                      text: texts.settingsContents.analytics.no,
-                      onPress: revert,
-                      style: 'cancel'
-                    },
-                    {
-                      text: texts.settingsContents.analytics.yes,
-                      onPress: createMatomoUserId
-                    }
-                  ],
-                  { cancelable: false }
-                ),
-              onDeactivate: (revert) =>
-                Alert.alert(
-                  texts.settingsTitles.analytics,
-                  texts.settingsContents.analytics.onDeactivate,
-                  [
-                    {
-                      text: texts.settingsContents.analytics.no,
-                      onPress: revert,
-                      style: 'cancel'
-                    },
-                    {
-                      text: texts.settingsContents.analytics.yes,
-                      onPress: removeMatomoUserId
-                    }
-                  ],
-                  { cancelable: false }
-                )
-            }
-          ]
-        });
-      }
-
-      if (settings.onboarding) {
-        const onboarding = await readFromStore(ONBOARDING_STORE_KEY);
-
-        settingsList.push({
-          data: [
-            {
-              title: settingsScreenListItemTitles.onboarding || texts.settingsTitles.onboarding,
-              topDivider: true,
-              value: onboarding === 'incomplete',
-              onActivate: () =>
-                Alert.alert(
-                  texts.settingsTitles.onboarding,
-                  texts.settingsContents.onboarding.onActivate,
-                  [
-                    {
-                      text: texts.settingsContents.onboarding.ok,
-                      onPress: () => addToStore(ONBOARDING_STORE_KEY, 'incomplete')
-                    }
-                  ]
-                ),
-              onDeactivate: () =>
-                Alert.alert(
-                  texts.settingsTitles.onboarding,
-                  texts.settingsContents.onboarding.onDeactivate,
-                  [
-                    {
-                      text: texts.settingsContents.onboarding.ok,
-                      onPress: () => addToStore(ONBOARDING_STORE_KEY, 'complete')
-                    }
-                  ]
-                )
-            }
-          ]
-        });
-      }
-
-      const termsAndConditionsAccepted = await readFromStore(TERMS_AND_CONDITIONS_STORE_KEY);
-      const hasTermsAndConditionsSection = await readFromStore(HAS_TERMS_AND_CONDITIONS_STORE_KEY);
-
-      if (
-        !!hasTermsAndConditionsSection &&
-        termsAndConditionsAccepted != null &&
-        termsAndConditionsAccepted != 'unknown'
-      ) {
-        settingsList.push({
-          data: [
-            {
-              title:
-                settingsScreenListItemTitles.termsAndConditions ||
-                texts.settingsTitles.termsAndConditions,
-              topDivider: true,
-              value: termsAndConditionsAccepted === 'accepted',
-              onActivate: () => null,
-              onDeactivate: (revert) =>
-                Alert.alert(
-                  texts.profile.termsAndConditionsAlertTitle,
-                  texts.settingsContents.termsAndConditions.onDeactivate,
-                  [
-                    {
-                      text: texts.settingsContents.termsAndConditions.abort,
-                      onPress: revert,
-                      style: 'cancel'
-                    },
-                    {
-                      text: texts.settingsContents.termsAndConditions.ok,
-                      onPress: () => addToStore(TERMS_AND_CONDITIONS_STORE_KEY, 'declined'),
-                      style: 'destructive'
-                    }
-                  ],
-                  { cancelable: false }
-                )
-            }
-          ]
-        });
-      }
-
-      if (settings.locationService) {
-        settingsList.push({
-          data: [SETTINGS_SCREENS.LOCATION]
-        });
-      }
-
-      settingsList.push({
-        data: [SETTINGS_SCREENS.PERMANENT_FILTER]
-      });
-
-      if (mowas?.regionalKeys?.length) {
-        settingsList.push({
-          data: [SETTINGS_SCREENS.MOWAS_REGION]
-        });
-      }
-
-      // settingsList.push({
-      //   data: [SETTINGS_SCREENS.LIST]
-      // });
-
-      if (settings.ar?.tourId) {
-        try {
-          const isARSupported = (await isARSupportedOnDevice())?.isARSupported;
-
-          if (isARSupported) {
-            settingsList.push({
-              data: [SETTINGS_SCREENS.AR]
-            });
-          }
-        } catch (error) {
-          // if Viro is not integrated, we need to catch the error for `isARSupportedOnDevice of null`
-          console.error(error);
+          settingsList.push({
+            data: [
+              {
+                title: settingsScreenListItemTitles.pushNotifications || t('settingsTitles.pushNotifications'),
+                topDivider: false,
+                value: pushPermission,
+                onActivate: onActivatePushNotifications,
+                onDeactivate: onDeactivatePushNotifications
+              }
+            ]
+          });
         }
-      }
 
-      setData(settingsList);
+        // settings should sometimes contain matomo analytics next, depending on server settings
+        if (settings.matomo) {
+          const { consent: matomoValue } = await matomoSettings();
+
+          settingsList.push({
+            data: [
+              {
+                title: settingsScreenListItemTitles.matomo || t('settingsTitles.analytics'),
+                topDivider: true,
+                value: matomoValue,
+                onActivate: (revert) =>
+                  Alert.alert(
+                    t('settingsTitles.analytics'),
+                    t('settingsContents.analytics.onActivate'),
+                    [
+                      {
+                        text: t('settingsContents.analytics.no'),
+                        onPress: revert,
+                        style: 'cancel'
+                      },
+                      {
+                        text: t('settingsContents.analytics.yes'),
+                        onPress: createMatomoUserId
+                      }
+                    ],
+                    { cancelable: false }
+                  ),
+                onDeactivate: (revert) =>
+                  Alert.alert(
+                    t('settingsTitles.analytics'),
+                    t('settingsContents.analytics.onDeactivate'),
+                    [
+                      {
+                        text: t('settingsContents.analytics.no'),
+                        onPress: revert,
+                        style: 'cancel'
+                      },
+                      {
+                        text: t('settingsContents.analytics.yes'),
+                        onPress: removeMatomoUserId
+                      }
+                    ],
+                    { cancelable: false }
+                  )
+              }
+            ]
+          });
+        }
+
+        if (settings.onboarding) {
+          const onboarding = await readFromStore(ONBOARDING_STORE_KEY);
+
+          settingsList.push({
+            data: [
+              {
+                title: settingsScreenListItemTitles.onboarding || t('settingsTitles.onboarding'),
+                topDivider: true,
+                value: onboarding === 'incomplete',
+                onActivate: () =>
+                  Alert.alert(
+                    t('settingsTitles.onboarding'),
+                    t('settingsContents.onboarding.onActivate'),
+                    [
+                      {
+                        text: t('settingsContents.onboarding.ok'),
+                        onPress: () => addToStore(ONBOARDING_STORE_KEY, 'incomplete')
+                      }
+                    ]
+                  ),
+                onDeactivate: () =>
+                  Alert.alert(
+                    t('settingsTitles.onboarding'),
+                    t('settingsContents.onboarding.onDeactivate'),
+                    [
+                      {
+                        text: t('settingsContents.onboarding.ok'),
+                        onPress: () => addToStore(ONBOARDING_STORE_KEY, 'complete')
+                      }
+                    ]
+                  )
+              }
+            ]
+          });
+        }
+
+        const termsAndConditionsAccepted = await readFromStore(TERMS_AND_CONDITIONS_STORE_KEY);
+        const hasTermsAndConditionsSection = await readFromStore(HAS_TERMS_AND_CONDITIONS_STORE_KEY);
+
+        if (
+          !!hasTermsAndConditionsSection &&
+          termsAndConditionsAccepted != null &&
+          termsAndConditionsAccepted != 'unknown'
+        ) {
+          settingsList.push({
+            data: [
+              {
+                title: settingsScreenListItemTitles.termsAndConditions || t('settingsTitles.termsAndConditions'),
+                topDivider: true,
+                value: termsAndConditionsAccepted === 'accepted',
+                onActivate: () => null,
+                onDeactivate: (revert) =>
+                  Alert.alert(
+                    t('profile.termsAndConditionsAlertTitle'),
+                    t('settingsContents.termsAndConditions.onDeactivate'),
+                    [
+                      {
+                        text: t('settingsContents.termsAndConditions.abort'),
+                        onPress: revert,
+                        style: 'cancel'
+                      },
+                      {
+                        text: t('settingsContents.termsAndConditions.ok'),
+                        onPress: () => addToStore(TERMS_AND_CONDITIONS_STORE_KEY, 'declined'),
+                        style: 'destructive'
+                      }
+                    ],
+                    { cancelable: false }
+                  )
+              }
+            ]
+          });
+        }
+
+        if (settings.locationService) {
+          settingsList.push({
+            data: [SETTINGS_SCREENS.LOCATION]
+          });
+        }
+
+        settingsList.push({
+          data: [SETTINGS_SCREENS.PERMANENT_FILTER]
+        });
+
+        if (mowas?.regionalKeys?.length) {
+          settingsList.push({
+            data: [SETTINGS_SCREENS.MOWAS_REGION]
+          });
+        }
+
+        // settingsList.push({
+        //   data: [SETTINGS_SCREENS.LIST]
+        // });
+
+        if (settings.ar?.tourId) {
+          try {
+            const isARSupported = (await isARSupportedOnDevice())?.isARSupported;
+
+            if (isARSupported) {
+              settingsList.push({
+                data: [SETTINGS_SCREENS.AR]
+              });
+            }
+          } catch (error) {
+            // if Viro is not integrated, we need to catch the error for `isARSupportedOnDevice of null`
+            console.error(error);
+          }
+        }
+
+        // safety: if nothing was added, provide a minimal default so the screen renders
+        if (!settingsList.length) {
+          console.warn('SettingsScreen.updateData: no settings entries were generated, adding fallback');
+          settingsList.push({ data: [SETTINGS_SCREENS.PERMANENT_FILTER] });
+        }
+
+        setData(settingsList);
+        console.log('SettingsScreen.updateData: settingsList length =', settingsList.length);
+      } catch (err) {
+        console.error('SettingsScreen.updateData error:', err);
+        const fallback = [{ data: [SETTINGS_SCREENS.PERMANENT_FILTER] }];
+        setData(fallback);
+      }
     };
     /* eslint-enable complexity */
 
@@ -406,12 +417,18 @@ export const SettingsScreen = ({ navigation, route }) => {
           keyExtractor={keyExtractor}
           sections={data}
           renderItem={({ item }) =>
-            renderItem({ item, navigation, listsWithoutArrows, settingsScreenListItemTitles })
+            renderItem({
+              item,
+              navigation,
+              listsWithoutArrows,
+              settingsScreenListItemTitles,
+              t
+            })
           }
           ListHeaderComponent={
-            !!texts.settingsScreen.intro && (
+            !!t('settingsScreen.intro') && (
               <Wrapper>
-                <RegularText>{texts.settingsScreen.intro}</RegularText>
+                <RegularText>{t('settingsScreen.intro')}</RegularText>
               </Wrapper>
             )
           }
@@ -430,7 +447,15 @@ const styles = StyleSheet.create({
   }
 });
 
-SettingsScreen.propTypes = {
+SettingsScreenComponent.propTypes = {
   navigation: PropTypes.object.isRequired,
-  route: PropTypes.object.isRequired
+  route: PropTypes.object.isRequired,
+  // provided by withTranslation HOC
+  t: PropTypes.func
 };
+
+const SettingsScreen = withTranslation()(SettingsScreenComponent);
+// export wrapped component as both named and default so imports from `src/screens` get the
+// translation-enabled component regardless of import style
+export { SettingsScreen };
+export default SettingsScreen;

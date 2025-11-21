@@ -13,7 +13,7 @@ import { useQuery } from 'react-query';
 import { SettingsContext } from './SettingsProvider';
 import {
   defaultAppDesignSystemConfig,
-  defaultResourceFiltersConfig
+  eventResourceFiltersConfig
 } from './config/appDesignSystem';
 import { defaultSueAppConfig } from './config/sue';
 import { storageHelper } from './helpers';
@@ -50,7 +50,7 @@ const defaultConfiguration = {
   appDesignSystem: defaultAppDesignSystemConfig,
   refetch: () => {},
   isLoading: true,
-  resourceFilters: defaultResourceFiltersConfig,
+  resourceFilters: eventResourceFiltersConfig,
   sueConfig: defaultSueAppConfig
 };
 
@@ -80,26 +80,30 @@ export const ConfigurationsProvider = ({ children }: { children?: ReactNode }) =
   const { data: resourceFiltersData } = useQueryWithApollo(getQuery(QUERY_TYPES.RESOURCE_FILTERS), {
     fetchPolicy: 'network-only'
   });
-
+// console.log('resourceFiltersData', resourceFiltersData);
+// console.log('defaultResourceFiltersConfig', eventResourceFiltersConfig);
   const mergedConfig = useMemo(() => {
-    const isSueConfigEmpty = !Object.keys(sue).length;
-    const isResourceFiltersEmpty = !resourceFiltersData?.resourceFilters?.length;
+  const isSueConfigEmpty = !Object.keys(sue).length;
+  const isResourceFiltersEmpty = !resourceFiltersData?.resourceFilters?.length;
 
-    if (isSueConfigEmpty && isResourceFiltersEmpty) {
-      return defaultConfiguration;
-    }
+  const resourceFilters = !isResourceFiltersEmpty
+    ? resourceFiltersData.resourceFilters.map((resourceFilter: any) => ({
+        ...resourceFilter,
+        dataResourceType: FILTER_QUERY_TYPES[resourceFilter.dataResourceType]
+      }))
+    : eventResourceFiltersConfig
 
-    const resourceFilters = resourceFiltersData?.resourceFilters?.map((resourceFilter: any) => ({
-      ...resourceFilter,
-      dataResourceType: FILTER_QUERY_TYPES[resourceFilter.dataResourceType]
-    }));
+  if (isSueConfigEmpty && isResourceFiltersEmpty) {
+    return defaultConfiguration;
+  }
 
-    return mergeDefaultConfiguration(defaultConfiguration, {
-      appDesignSystem,
-      resourceFilters,
-      sueConfig: { ...sue, ...sueConfigData, sueProgress }
-    });
-  }, [sueConfigData, sueProgress, resourceFiltersData]);
+  return mergeDefaultConfiguration(defaultConfiguration, {
+    appDesignSystem,
+    resourceFilters,
+    sueConfig: { ...sue, ...sueConfigData, sueProgress }
+  });
+}, [sueConfigData, sueProgress, resourceFiltersData]);
+// console.log('mergedConfig.resourceFilters', mergedConfig.resourceFilters);
 
   const reloadCallback = useCallback(async () => {
     setIsLoading(true);

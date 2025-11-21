@@ -124,7 +124,7 @@ export const defaultStackConfig = ({
   screenOptions: getScreenOptions({ withDrawer: isDrawer }),
   screenConfigs: [
     {
-      initialParams: initialParams || { title: t('screenTitles.about') },
+      initialParams: initialParams || { titleKey: 'screenTitles.about', titleFallback: texts.screenTitles.about },
       routeName: ScreenName.About,
       screenComponent: AboutScreen
     },
@@ -283,7 +283,8 @@ export const defaultStackConfig = ({
     },
     {
       initialParams: initialParams || {
-        title: t('screenTitles.events'),
+        titleKey: 'screenTitles.events',
+        titleFallback: texts.screenTitles.events,
         query: QUERY_TYPES.EVENT_RECORDS,
         queryVariables: { limit: 15, order: 'listDate_ASC' }
       },
@@ -308,7 +309,8 @@ export const defaultStackConfig = ({
     {
       initialParams: initialParams || {
         isDrawer,
-        title: texts.screenTitles.home
+        titleKey: 'screenTitles.home',
+        titleFallback: texts.screenTitles.home
       },
       routeName: ScreenName.Home,
       screenComponent: HomeScreen,
@@ -321,7 +323,8 @@ export const defaultStackConfig = ({
     },
     {
       initialParams: initialParams || {
-        title: t('screenTitles.pointsOfInterest'),
+        titleKey: 'screenTitles.pointsOfInterest',
+        titleFallback: texts.screenTitles.pointsOfInterest,
         query: QUERY_TYPES.CATEGORIES
       },
       routeName: ScreenName.Index,

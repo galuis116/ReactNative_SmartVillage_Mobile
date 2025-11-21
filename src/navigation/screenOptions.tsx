@@ -4,6 +4,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 
 import { DiagonalGradient, FavoritesHeader, HeaderLeft, HeaderRight } from '../components';
+import HeaderTranslatedTitle from './HeaderTranslatedTitle';
 import { colors, normalize } from '../config';
 
 type OptionProps = {
@@ -39,8 +40,12 @@ export const getScreenOptions =
     return {
       // header gradient:
       // https://stackoverflow.com/questions/44924323/react-navigation-gradient-color-for-header
-      headerBackground: () => <DiagonalGradient />,
-      headerTitleStyle: styles.headerTitleStyle,
+      // Ensure the header itself is transparent so the custom background shows through.
+      headerStyle: { backgroundColor: 'transparent' },
+  headerBackground: (props) => <DiagonalGradient {...(props as any)} />,
+  headerTitleStyle: styles.headerTitleStyle,
+  // Ensure title container doesn't have an opaque background that hides the gradient
+  headerTitleContainerStyle: { backgroundColor: 'transparent' },
       headerTitleAlign: 'center',
       headerRight: () => (
         <HeaderRight
@@ -57,19 +62,21 @@ export const getScreenOptions =
           }}
         />
       ),
-      headerLeft:
-        !noHeaderLeft &&
-        (withFavorites
+      headerLeft: !noHeaderLeft
+        ? withFavorites
           ? () => <FavoritesHeader navigation={navigation} style={styles.icon} />
-          : HeaderLeft),
-      title: route.params?.title ?? '',
+          : HeaderLeft
+        : undefined,
+  // Render a header title component that reacts to i18n language changes.
+  // The component will resolve translation keys or fall back to provided strings.
+  headerTitle: () => <HeaderTranslatedTitle route={route} />,
       cardStyleInterpolator: cardStyleInterpolator ?? CardStyleInterpolators.forHorizontalIOS
     };
   };
 
 const styles = StyleSheet.create({
   headerTitleStyle: {
-    color: colors.lightestText,
+    color: colors.darkText,
     fontFamily: 'condbold',
     fontSize: normalize(18),
     lineHeight: normalize(23)

@@ -27,7 +27,9 @@ export const IndexScreen = ({ navigation, route }) => {
   const title = route.params?.title ?? '';
   const query = route.params?.query ?? '';
   const Component = getComponent(query);
-
+  console.log(`Rendering ${Component.name} with query: ${query}`);
+  // debug: show incoming params to verify title / query values used for the header
+  console.log('Index route params:', route.params);
   useEffect(() => {
     if (query && isConnected) {
       const MATOMO_TRACKING_SCREEN = {

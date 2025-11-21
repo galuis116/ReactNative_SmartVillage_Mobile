@@ -1,15 +1,16 @@
 import _filter from 'lodash/filter';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { withTranslation } from 'react-i18next';
 import { ActivityIndicator, SectionList, StyleSheet } from 'react-native';
 
 import { colors, normalize, texts } from '../config';
 
-import { CategoryListItem } from './CategoryListItem';
+import CategoryListItem from './CategoryListItem';
 import { LoadingContainer } from './LoadingContainer';
 import { SectionHeader } from './SectionHeader';
 
-export class CategoryList extends React.PureComponent {
+class CategoryListComponent extends React.PureComponent {
   keyExtractor = (item, index) => `index${index}-id${item.id}`;
 
   renderSectionHeader = ({ section: { title, data } }) => {
@@ -31,10 +32,17 @@ export class CategoryList extends React.PureComponent {
       queryVariables,
       refreshControl
     } = this.props;
-    const {
-      categoryTitlesPointsOfInterest = texts.categoryTitles.pointsOfInterest,
-      categoryTitlesTours = texts.categoryTitles.tours
-    } = categoryTitles;
+    const { t } = this.props;
+
+    const categoryTitlesPointsOfInterest =
+      (categoryTitles && categoryTitles.categoryTitlesPointsOfInterestKey)
+        ? t(categoryTitles.categoryTitlesPointsOfInterestKey)
+        : (categoryTitles && categoryTitles.categoryTitlesPointsOfInterest) ?? t('categoryTitles.places');
+
+    const categoryTitlesTours =
+      (categoryTitles && categoryTitles.categoryTitlesToursKey)
+        ? t(categoryTitles.categoryTitlesToursKey)
+        : (categoryTitles && categoryTitles.categoryTitlesTours) ?? t('categoryTitles.tours');
 
     if (!data?.length) {
       return (
@@ -100,7 +108,7 @@ const styles = StyleSheet.create({
   }
 });
 
-CategoryList.propTypes = {
+CategoryListComponent.propTypes = {
   categoryTitles: PropTypes.object,
   data: PropTypes.array,
   hasSectionHeader: PropTypes.bool,
@@ -109,5 +117,13 @@ CategoryList.propTypes = {
   navigation: PropTypes.object.isRequired,
   noSubtitle: PropTypes.bool,
   queryVariables: PropTypes.object,
-  refreshControl: PropTypes.object
+  refreshControl: PropTypes.object,
+  // from withTranslation HOC
+  t: PropTypes.func
 };
+
+// Export a wrapped component as both named and default so callers using
+// either `import { CategoryList }` or `import CategoryList from ...` get
+// the translation-enabled component (prevents `t is not a function`).
+export const CategoryList = withTranslation()(CategoryListComponent);
+export default CategoryList;

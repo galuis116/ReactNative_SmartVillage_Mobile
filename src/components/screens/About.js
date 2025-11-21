@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useContext, useState } from 'react';
+import { withTranslation } from 'react-i18next';
 import { ActivityIndicator, RefreshControl, SectionList, StyleSheet } from 'react-native';
 
 import { colors, normalize, texts } from '../../config';
@@ -11,7 +12,7 @@ import { LoadingContainer } from '../LoadingContainer';
 import { SectionHeader } from '../SectionHeader';
 import { VersionNumber } from '../VersionNumber';
 
-export const About = ({ navigation, publicJsonFile = 'about', withHomeRefresh, withSettings }) => {
+const AboutComponent = ({ navigation, publicJsonFile = 'about', withHomeRefresh, withSettings, t }) => {
   const { data, loading, refetch } = useStaticContent({
     name: publicJsonFile,
     type: 'json',
@@ -24,9 +25,7 @@ export const About = ({ navigation, publicJsonFile = 'about', withHomeRefresh, w
   useHomeRefresh(withHomeRefresh ? refetch : undefined);
 
   const refresh = async (refetch) => {
-    if (withHomeRefresh) {
-      return;
-    }
+    if (withHomeRefresh) return;
 
     setRefreshing(true);
     isConnected && (await refetch());
@@ -47,8 +46,10 @@ export const About = ({ navigation, publicJsonFile = 'about', withHomeRefresh, w
   data.forEach((item) => (item.isHeadlineTitle = false));
 
   const { sections = {} } = globalSettings;
-  const { headlineAbout = texts.homeTitles.about } = sections;
+  const { headlineAboutKey, headlineAbout = texts.homeTitles.about } = sections;
+  const aboutTitle = headlineAboutKey ? t(headlineAboutKey) : t('homeTitles.about');
 
+  // Add Settings route if needed
   if (withSettings && !data.find((item) => item.routeName === 'Settings')) {
     data.push({
       bottomDivider: true,
@@ -58,10 +59,28 @@ export const About = ({ navigation, publicJsonFile = 'about', withHomeRefresh, w
     });
   }
 
+  // Helper to translate item titles
+  const translateItemTitle = (item) => {
+    switch (item.routeName) {
+      case 'Settings':
+        return t('screenTitles.appSettings');
+      case 'LanguageSelection':
+        return t('screenTitles.languageSettings');
+      default:
+        return item.title;
+    }
+  };
+
+  // Apply translation to each item
+  const translatedData = data.map((item) => ({
+    ...item,
+    title: translateItemTitle(item),
+  }));
+
   const sectionData = [
     {
-      title: headlineAbout,
-      data
+      title: aboutTitle,
+      data: translatedData
     }
   ];
 
@@ -98,10 +117,15 @@ const styles = StyleSheet.create({
   }
 });
 
-About.propTypes = {
+AboutComponent.propTypes = {
   navigation: PropTypes.object.isRequired,
   sectionData: PropTypes.array,
   publicJsonFile: PropTypes.string,
   withHomeRefresh: PropTypes.bool,
-  withSettings: PropTypes.bool
+  withSettings: PropTypes.bool,
+  t: PropTypes.func.isRequired
 };
+
+// Export both named and default exports with translation wrapper
+export const About = withTranslation()(AboutComponent);
+export default About;

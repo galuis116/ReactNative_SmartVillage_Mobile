@@ -263,11 +263,9 @@ export const GET_POINT_OF_INTEREST = gql`
             url
           }
         }
-        pointOfInterest {
-          operatingCompany {
-            name
-          }
-        }
+        # pointOfInterest field was removed because some voucher items are of type GenericItem
+        # which does not expose a pointOfInterest field; requesting it caused an undefinedField error.
+        # If needed, add an inline fragment for the specific voucher type that exposes this field.
         payload
       }
       hasTravelTimes

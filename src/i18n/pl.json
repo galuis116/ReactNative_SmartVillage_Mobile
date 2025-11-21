@@ -14,7 +14,8 @@
   "homeTitles": {
     "events": "Wydarzenia",
     "pointsOfInterest": "Miejsca i wycieczki",
-    "news": "Wiadomości"
+    "news": "Wiadomości",
+    "about": "O aplikacji"
   },
   "homeCategoriesNews": {
     "categoryTitle": "Wiadomości",
@@ -22,6 +23,7 @@
   },
   "choose_language": "Wybierz język",
   "screenTitles": {
+    "languageSettings": "Ustawienia języka",
     "about": "Menu",
     "appSettings": "Ustawienia aplikacji",
     "constructionSite": "Plac budowy",
@@ -73,5 +75,81 @@
     "wasteCollection": "Kalendarz odpadów",
     "languageSelection": "Wybierz język",
     "weather": "Pogoda"
+  },
+  "categoryTitles": {
+    "places": "Miejsca",
+    "tours": "Trasy"
+  },
+  "categories": {
+    "4": "Zamki i pałace",
+    "5": "Piękne trasy rowerowe"
+  },
+  "detailTitles": {
+    "pointOfInterest": "Miejsce",
+    "tour": "Trasa",
+    "eventRecord": "Wydarzenie"
+  },
+  "settingsTitles": {
+    "pushNotifications": "Powiadomienia push",
+    "analytics": "Analityka",
+    "onboarding": "Pokaż wprowadzenie do aplikacji",
+    "termsAndConditions": "Regulamin",
+    "locationService": "Usługa lokalizacji"
+  },
+  "settingsContents": {
+    "analytics": {
+      "no": "Nie",
+      "onActivate": "Włączyć Matomo Analytics? To pomoże nam ulepszyć aplikację. Matomo Analytics zostanie aktywowane po ponownym uruchomieniu aplikacji.",
+      "onActivateWithoutRestart": "Włączyć Matomo Analytics? To pomoże nam ulepszyć aplikację.",
+      "onDeactivate": "Wyłączyć Matomo Analytics? Zmiana zostanie zastosowana po ponownym uruchomieniu aplikacji.",
+      "yes": "Tak"
+    },
+    "ar": {
+      "setting": "Ustawienia AR"
+    },
+    "list": {
+      "setting": "Wygląd aplikacji"
+    },
+    "locationService": {
+      "abort": "Anuluj",
+      "alternativePositionHint": "Jeśli usługi lokalizacji są wyłączone, zostanie użyta alternatywna lokalizacja.",
+      "cancel": "Anuluj",
+      "chooseAlternateLocationButton": "Wybierz alternatywną lokalizację",
+      "next": "Dalej",
+      "ok": "OK",
+      "onLocationServiceMissing": "Aby włączyć to ustawienie, nadaj uprawnienia lokalizacji w ustawieniach systemowych.",
+      "onSystemPermissionMissing": "Aby włączyć to ustawienie, nadaj uprawnienia lokalizacji w ustawieniach systemowych. Po włączeniu usług lokalizacji może być konieczne ponowne uruchomienie aplikacji.",
+      "save": "Zapisz",
+      "setting": "Lokalizacja",
+      "settings": "Ustawienia"
+    },
+    "mowasRegion": {
+      "setting": "Regiony MoWaS"
+    },
+    "onboarding": {
+      "onActivate": "Wprowadzenie do aplikacji zostanie pokazane przy następnym uruchomieniu.",
+      "onDeactivate": "Wprowadzenie do aplikacji nie zostanie pokazane przy następnym uruchomieniu.",
+      "ok": "OK"
+    },
+    "permanentFilter": {
+      "setting": "Źródła danych"
+    },
+    "termsAndConditions": {
+      "abort": "Anuluj",
+      "onActivate": "",
+      "onDeactivate": "Przy następnym uruchomieniu zostaniesz ponownie poproszony o zgodę na politykę prywatności. Bez akceptacji polityki prywatności nie możesz korzystać z aplikacji. Zawsze traktujemy Twoje dane poufnie i z najwyższą starannością.",
+      "ok": "Zgadzam się"
+    }
+  },
+  "settingsScreen": {
+    "intro": "Zarządzaj ustawieniami i preferencjami aplikacji"
+  },
+  "version": {
+    "versionInfos": "Informacje o wersji",
+    "appVersion": "Wersja aplikacji"
+  },
+  "locationOverview": {
+    "list": "Widok listy",
+    "map": "Widok mapy"
   }
 }

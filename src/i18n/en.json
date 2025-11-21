@@ -14,7 +14,8 @@
   "homeTitles": {
     "events": "Events",
     "pointsOfInterest": "Points of Interest",
-    "news": "News"
+    "news": "News",
+    "about": "About the App"
   },
   "homeCategoriesNews": {
     "categoryTitle": "News",
@@ -22,6 +23,7 @@
   },
   "choose_language": "Select Language",
   "screenTitles": {
+    "languageSettings": "Language Setting",
     "about": "Menu",
     "appSettings": "App Settings",
     "constructionSite": "Construction Site",
@@ -73,5 +75,81 @@
     "wasteCollection": "Waste Collection",
     "languageSelection": "Select Language",
     "weather": "Weather"
+  },
+  "categoryTitles": {
+    "places": "Places",
+    "tours": "Tours"
+  },
+  "categories": {
+    "4": "Castles and Palaces",
+    "5": "Beautiful Bike Routes"
+  },
+  "detailTitles": {
+    "pointOfInterest": "Place",
+    "tour": "Tour",
+    "eventRecord": "Event"
+  },
+  "settingsTitles": {
+    "pushNotifications": "Push Notifications",
+    "analytics": "Analytics",
+    "onboarding": "Show App Introduction",
+    "termsAndConditions": "Terms and Conditions",
+    "locationService": "Location Service"
+  },
+  "settingsContents": {
+    "analytics": {
+      "no": "No",
+      "onActivate": "Enable Matomo Analytics? This helps improve the app. Matomo Analytics will take effect after the next app restart.",
+      "onActivateWithoutRestart": "Enable Matomo Analytics? This helps improve the app.",
+      "onDeactivate": "Disable Matomo Analytics? The change will take effect after the next app restart.",
+      "yes": "Yes"
+    },
+    "ar": {
+      "setting": "AR Settings"
+    },
+    "list": {
+      "setting": "App Appearance"
+    },
+    "locationService": {
+      "abort": "Cancel",
+      "alternativePositionHint": "If location services are disabled, the alternative location will be used instead.",
+      "cancel": "Cancel",
+      "chooseAlternateLocationButton": "Choose alternative location",
+      "next": "Next",
+      "ok": "OK",
+      "onLocationServiceMissing": "To enable this setting, grant location permission in your system settings first.",
+      "onSystemPermissionMissing": "To enable this setting, grant location permission in your system settings first. After enabling the location service you may need to restart the app.",
+      "save": "Save",
+      "setting": "Location",
+      "settings": "Settings"
+    },
+    "mowasRegion": {
+      "setting": "MoWaS Regions"
+    },
+    "onboarding": {
+      "onActivate": "The app introduction will be shown on next start.",
+      "onDeactivate": "The app introduction will not be shown on next start.",
+      "ok": "OK"
+    },
+    "permanentFilter": {
+      "setting": "Data Sources"
+    },
+    "termsAndConditions": {
+      "abort": "Cancel",
+      "onActivate": "",
+      "onDeactivate": "On next start the consent to the privacy notice will be requested again. Without accepting our privacy notice you cannot use the app. We always treat your data confidentially and with the utmost care.",
+      "ok": "Agree"
+    }
+  },
+  "settingsScreen": {
+    "intro": "Manage app settings and preferences"
+  },
+  "version": {
+    "versionInfos": "Version information",
+    "appVersion": "App Version"
+  },
+  "locationOverview": {
+    "list": "List View",
+    "map": "Map View"
   }
 }

@@ -65,7 +65,7 @@ export const Service = ({
     isEditMode,
     staticJsonName
   );
-
+  console.log('Service', tiles);
   const onPress = useCallback(
     () =>
       isEditMode

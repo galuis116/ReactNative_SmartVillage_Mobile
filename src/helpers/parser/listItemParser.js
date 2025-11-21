@@ -59,7 +59,8 @@ const parseEventRecords = (data, skipLastDivider, withDate, withTime) => {
     listDate: eventRecord.listDate,
     routeName: ScreenName.Detail,
     params: {
-      title: texts.detailTitles.eventRecord,
+      titleKey: 'detailTitles.eventRecord',
+      titleFallback: texts.detailTitles.eventRecord,
       query: QUERY_TYPES.EVENT_RECORD,
       queryVariables: { id: `${eventRecord.id}` },
       rootRouteName: ROOT_ROUTE_NAMES.EVENT_RECORDS,
@@ -163,7 +164,8 @@ const parsePointOfInterest = (data, skipLastDivider = false, queryVariables = un
     addresses: pointOfInterest.addresses,
     routeName: ScreenName.Detail,
     params: {
-      title: texts.detailTitles.pointOfInterest,
+      titleKey: 'detailTitles.pointOfInterest',
+      titleFallback: texts.detailTitles.pointOfInterest,
       query: QUERY_TYPES.POINT_OF_INTEREST,
       queryVariables: { id: `${pointOfInterest.id}`, categoryName: queryVariables?.category },
       rootRouteName: ROOT_ROUTE_NAMES.POINTS_OF_INTEREST_AND_TOURS,
@@ -190,7 +192,8 @@ const parseTours = (data, skipLastDivider) => {
     addresses: tour.addresses,
     routeName: ScreenName.Detail,
     params: {
-      title: texts.detailTitles.tour,
+      titleKey: 'detailTitles.tour',
+      titleFallback: texts.detailTitles.tour,
       query: QUERY_TYPES.TOUR,
       queryVariables: { id: `${tour.id}` },
       rootRouteName: ROOT_ROUTE_NAMES.POINTS_OF_INTEREST_AND_TOURS,
@@ -214,6 +217,7 @@ const parseCategories = (data, skipLastDivider, routeName, queryVariables, query
       id: category.id,
       iconName: category.iconName?.length ? category.iconName : undefined,
       title: category.name,
+      titleKey: `categories.${category.id}`, // Add translation key based on category ID
       routeName,
       parent: category.parent,
       params: {

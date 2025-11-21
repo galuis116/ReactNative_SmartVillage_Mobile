@@ -7,16 +7,12 @@ export const initialContext = {
     hdvt: {},
     navigation: 'tab',
     sections: {},
-    settings: {
-      pushNotifications: true,
-      locationService: true,
-      matomo: true,
-      onboarding: false
-    },
+    settings: {},
     waste: {},
     whistleblow: {},
     widgets: []
   },
+   
   listTypesSettings: {},
   locationSettings: {},
   conversationSettings: {}

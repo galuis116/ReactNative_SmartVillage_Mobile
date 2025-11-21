@@ -10,6 +10,7 @@ import React, {
   useMemo,
   useState
 } from 'react';
+import { withTranslation } from 'react-i18next';
 import { useQuery } from 'react-apollo';
 import { ActivityIndicator, RefreshControl } from 'react-native';
 import { Divider } from 'react-native-elements';
@@ -104,7 +105,7 @@ const getAdditionalQueryVariables = (
 };
 
 /* eslint-disable complexity */
-export const Overviews = ({ navigation, route }) => {
+const OverviewsComponent = ({ navigation, route, t }) => {
   const { isConnected, isMainserverUp } = useContext(NetworkContext);
   const { resourceFilters } = useContext(ConfigurationsContext);
   const { resourceFiltersState = {}, resourceFiltersDispatch } = useContext(PermanentFilterContext);
@@ -124,12 +125,12 @@ export const Overviews = ({ navigation, route }) => {
   const INITIAL_FILTER = [
     {
       id: FILTER_TYPES.LIST,
-      title: texts.locationOverview.list,
+      title: t('locationOverview.list'),
       selected: initialFilter == FILTER_TYPES.LIST
     },
     {
       id: FILTER_TYPES.MAP,
-      title: texts.locationOverview.map,
+      title: t('locationOverview.map'),
       selected: initialFilter == FILTER_TYPES.MAP
     }
   ];
@@ -465,7 +466,7 @@ export const Overviews = ({ navigation, route }) => {
         !!listItems?.length &&
         query === QUERY_TYPES.POINTS_OF_INTEREST &&
         switchBetweenListAndMap == SWITCH_BETWEEN_LIST_AND_MAP.BOTTOM_FLOATING_BUTTON &&
-        filterType.find((entry) => entry.title == texts.locationOverview.list)?.selected && (
+        filterType.find((entry) => entry.id == FILTER_TYPES.LIST)?.selected && (
           <IndexMapSwitch filter={filterType} setFilter={setFilterType} />
         )}
     </SafeAreaViewFlex>
@@ -473,7 +474,12 @@ export const Overviews = ({ navigation, route }) => {
 };
 /* eslint-enable complexity */
 
-Overviews.propTypes = {
+OverviewsComponent.propTypes = {
   navigation: PropTypes.object.isRequired,
-  route: PropTypes.object.isRequired
+  route: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired
 };
+
+// Export wrapped component with translation HOC
+export const Overviews = withTranslation()(OverviewsComponent);
+export default Overviews;

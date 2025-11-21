@@ -156,11 +156,14 @@ export const useFilterCities = (isCityInputFocused: boolean) => {
     (currentInputValue, addressesData) => {
       if (isInputAutoFocus && currentInputValue === '' && !isCityInputFocused) return [];
 
-      const cities = addressesData?.filter((address) =>
-        address.city?.toLowerCase().includes(currentInputValue?.toLowerCase())
-      );
+      // make defensive: ensure addressesData is an array before filtering
+      const cities = addressesData
+        ? addressesData.filter((address) =>
+            (address.city || '').toLowerCase().includes((currentInputValue || '').toLowerCase())
+          )
+        : [];
 
-      const sortedCities = _uniqBy(cities, 'city');
+      const sortedCities = _uniqBy(cities, 'city') || [];
 
       if (isInputAutoFocus) {
         return sortedCities;
@@ -194,19 +197,22 @@ export const useFilterStreets = (inputValueCity: string, isStreetInputFocused: b
       if (hasWasteAddressesTwoStep && inputValueCity === '') return [];
       if (isInputAutoFocus && currentInputValue === '' && !isStreetInputFocused) return [];
 
+      // ensure addressesData is an array and normalize strings before calling toLowerCase
       const streets = addressesData
-        ?.filter((address) => {
-          const street = getStreetString(address);
+        ? addressesData
+            .filter((address) => {
+              const street = getStreetString(address) || '';
 
-          return street?.toLowerCase().includes(currentInputValue.toLowerCase());
-        })
-        ?.filter((address) => (hasWasteAddressesTwoStep ? address.city === inputValueCity : true));
+              return street.toLowerCase().includes((currentInputValue || '').toLowerCase());
+            })
+            .filter((address) => (hasWasteAddressesTwoStep ? address.city === inputValueCity : true))
+        : [];
 
       if (isInputAutoFocus) {
         return streets || [];
       }
 
-      return streets.slice(0, wasteAddressesStreetCount) || [];
+      return (streets || []).slice(0, wasteAddressesStreetCount);
     },
     [getStreetString, inputValueCity, isStreetInputFocused]
   );

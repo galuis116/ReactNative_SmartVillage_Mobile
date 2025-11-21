@@ -225,8 +225,15 @@ export const EventRecords = ({ navigation, route }) => {
       locations: eventRecordsAddressesData,
       queryVariables
     });
-  }, [data]);
-
+  }, [data,
+  query,
+  resourceFilters,
+  eventRecordsCategoriesData,
+  eventRecordsAddressesData,
+  queryVariables]);
+  console.log('resourceFilters', resourceFilters);
+  // console.log('filterTypes', filterTypes);
+  console.log('Event data', data?.pages[0].eventRecords);
   useEffect(() => {
     updateResourceFiltersStateHelper({
       query,
@@ -269,6 +276,9 @@ export const EventRecords = ({ navigation, route }) => {
       </LoadingContainer>
     );
   }
+  // console.log('filterTypes', filterTypes);
+// console.log('queryVariables', queryVariables);
+// console.log('initialQueryVariables', initialQueryVariables);
 
   return (
     <SafeAreaViewFlex>

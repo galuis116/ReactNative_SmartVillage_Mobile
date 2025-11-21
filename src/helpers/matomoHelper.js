@@ -2,6 +2,7 @@ import { randomUUID as uuid } from 'expo-crypto';
 import { Alert } from 'react-native';
 
 import { texts } from '../config';
+import { t } from 'i18next';
 import { storageHelper } from '../helpers/storageHelper';
 
 export const showMatomoAlert = async (fromAppIntro) => {
@@ -9,17 +10,17 @@ export const showMatomoAlert = async (fromAppIntro) => {
 
   if (!settings?.matomoHandledOnStartup) {
     Alert.alert(
-      texts.settingsTitles.analytics,
+      t('settingsTitles.analytics'),
       fromAppIntro
-        ? texts.settingsContents.analytics.onActivateWithoutRestart
-        : texts.settingsContents.analytics.onActivate,
+        ? t('settingsContents.analytics.onActivateWithoutRestart')
+        : t('settingsContents.analytics.onActivate'),
       [
         {
-          text: texts.settingsContents.analytics.no,
+          text: t('settingsContents.analytics.no'),
           style: 'cancel'
         },
         {
-          text: texts.settingsContents.analytics.yes,
+          text: t('settingsContents.analytics.yes'),
           onPress: createMatomoUserId
         }
       ],

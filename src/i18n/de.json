@@ -14,7 +14,8 @@
   "homeTitles": {
     "events": "Veranstaltungen",
     "pointsOfInterest": "Orte & Touren",
-    "news": "Nachrichten"
+    "news": "Nachrichten",
+    "about": "Über die App"
   },
   "homeCategoriesNews": {
     "categoryTitle": "Nachrichten",
@@ -22,6 +23,7 @@
   },
   "choose_language": "Sprache auswählen",
   "screenTitles": {
+    "languageSettings": "Spracheinstellung",
     "about": "Menü",
     "appSettings": "App-Einstellungen",
     "constructionSite": "Baustelle",
@@ -73,5 +75,81 @@
     "wasteCollection": "Abfallkalender",
     "languageSelection": "Sprache auswählen",
     "weather": "Wetter"
+  },
+  "categoryTitles": {
+    "places": "Orte",
+    "tours": "Touren"
+  },
+  "categories": {
+    "4": "Burgen und Schlösser",
+    "5": "Schöne Fahrradrouten"
+  },
+  "detailTitles": {
+    "pointOfInterest": "Ort",
+    "tour": "Tour",
+    "eventRecord": "Veranstaltung"
+  },
+  "settingsTitles": {
+    "pushNotifications": "Push-Benachrichtigungen",
+    "analytics": "Analyse",
+    "onboarding": "App-Einführung anzeigen",
+    "termsAndConditions": "Nutzungsbedingungen",
+    "locationService": "Standortdienst"
+  },
+  "settingsContents": {
+    "analytics": {
+      "no": "Nein",
+      "onActivate": "Matomo Analytics aktivieren? Dies hilft uns, die App zu verbessern. Matomo Analytics wird nach dem nächsten App-Neustart wirksam.",
+      "onActivateWithoutRestart": "Matomo Analytics aktivieren? Dies hilft uns, die App zu verbessern.",
+      "onDeactivate": "Matomo Analytics deaktivieren? Die Änderung wird nach dem nächsten App-Neustart wirksam.",
+      "yes": "Ja"
+    },
+    "ar": {
+      "setting": "AR-Einstellungen"
+    },
+    "list": {
+      "setting": "App-Design"
+    },
+    "locationService": {
+      "abort": "Abbrechen",
+      "alternativePositionHint": "Wenn der Standortdienst deaktiviert ist, wird stattdessen der alternative Standort verwendet.",
+      "cancel": "Abbrechen",
+      "chooseAlternateLocationButton": "Alternativen Standort auswählen",
+      "next": "Weiter",
+      "ok": "OK",
+      "onLocationServiceMissing": "Um diese Einstellung zu aktivieren, erteilen Sie zuerst die Standortberechtigung in den Systemeinstellungen.",
+      "onSystemPermissionMissing": "Um diese Einstellung zu aktivieren, erteilen Sie zuerst die Standortberechtigung in den Systemeinstellungen. Nach dem Aktivieren des Standortdienstes müssen Sie die App eventuell neu starten.",
+      "save": "Speichern",
+      "setting": "Standort",
+      "settings": "Einstellungen"
+    },
+    "mowasRegion": {
+      "setting": "MoWaS-Regionen"
+    },
+    "onboarding": {
+      "onActivate": "Die App-Einführung wird beim nächsten Start angezeigt.",
+      "onDeactivate": "Die App-Einführung wird beim nächsten Start nicht angezeigt.",
+      "ok": "OK"
+    },
+    "permanentFilter": {
+      "setting": "Datenquellen"
+    },
+    "termsAndConditions": {
+      "abort": "Abbrechen",
+      "onActivate": "",
+      "onDeactivate": "Beim nächsten Start wird die Zustimmung zur Datenschutzerklärung erneut abgefragt. Ohne Zustimmung zur Datenschutzerklärung kann die App nicht genutzt werden. Wir behandeln Ihre Daten stets vertraulich und mit größter Sorgfalt.",
+      "ok": "Zustimmen"
+    }
+  },
+  "settingsScreen": {
+    "intro": "Verwalten Sie App-Einstellungen und Präferenzen"
+  },
+  "version": {
+    "versionInfos": "Versionsinformationen",
+    "appVersion": "App-Version"
+  },
+  "locationOverview": {
+    "list": "Listenansicht",
+    "map": "Kartenansicht"
   }
 }

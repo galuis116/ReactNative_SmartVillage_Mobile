@@ -142,7 +142,7 @@ const MainAppWithApolloProvider = () => {
         variables: { name: 'globalSettings', version: appJson.expo.version },
         fetchPolicy
       });
-      console.log('globalSettingsFromServer', response.data);
+      console.log('globalSettingsFromServer', response.data?.publicJsonFile.content);
       globalSettingsData = response.data;
     } catch (error) {
       console.warn('error', error);

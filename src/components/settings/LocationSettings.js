@@ -2,6 +2,7 @@ import * as Location from 'expo-location';
 import React, { useContext, useState } from 'react';
 import { Alert, Linking, ScrollView, StyleSheet } from 'react-native';
 import Collapsible from 'react-native-collapsible';
+import { withTranslation } from 'react-i18next';
 
 import { normalize, texts } from '../../config';
 import { geoLocationToLocationObject } from '../../helpers';
@@ -28,7 +29,7 @@ export const getLocationMarker = (locationObject) => ({
   }
 });
 
-export const LocationSettings = () => {
+export const LocationSettingsComponent = ({ t }) => {
   const { globalSettings } = useContext(SettingsContext);
   const { settings = {} } = globalSettings || {};
   const { locationService: globalSettingsLocationService = {} } = settings;
@@ -50,7 +51,7 @@ export const LocationSettings = () => {
   } = locationSettings || {};
 
   const locationServiceSwitchData = {
-    title: texts.settingsTitles.locationService,
+    title: t('settingsTitles.locationService') || texts.settingsTitles.locationService,
     bottomDivider: true,
     topDivider: true,
     value: locationService,
@@ -80,14 +81,14 @@ export const LocationSettings = () => {
         // if we neither have the permission, nor can we ask for it, then show an alert that the permission is missing
         revert();
         Alert.alert(
-          texts.settingsTitles.locationService,
-          texts.settingsContents.locationService.onSystemPermissionMissing,
+          t('settingsTitles.locationService') || texts.settingsTitles.locationService,
+          t('settingsContents.locationService.onSystemPermissionMissing') || texts.settingsContents.locationService.onSystemPermissionMissing,
           [
             {
-              text: texts.settingsContents.locationService.cancel
+              text: t('settingsContents.locationService.cancel') || texts.settingsContents.locationService.cancel
             },
             {
-              text: texts.settingsContents.locationService.settings,
+              text: t('settingsContents.locationService.settings') || texts.settingsContents.locationService.settings,
               onPress: () => Linking.openSettings()
             }
           ]
@@ -116,7 +117,7 @@ export const LocationSettings = () => {
         <>
           <Wrapper>
             <RegularText>
-              {texts.settingsContents.locationService.alternativePositionHint}
+              {t('settingsContents.locationService.alternativePositionHint') || texts.settingsContents.locationService.alternativePositionHint}
             </RegularText>
           </Wrapper>
 
@@ -131,7 +132,7 @@ export const LocationSettings = () => {
             />
             <Wrapper>
               <Button
-                title={texts.settingsContents.locationService.save}
+                title={t('settingsContents.locationService.save') || texts.settingsContents.locationService.save}
                 onPress={() => {
                   selectedPosition &&
                     setAndSyncLocationSettings({
@@ -150,7 +151,7 @@ export const LocationSettings = () => {
                 style={styles.containerStyle}
               >
                 <RegularText primary center>
-                  {texts.settingsContents.locationService.abort}
+                  {t('settingsContents.locationService.abort') || texts.settingsContents.locationService.abort}
                 </RegularText>
               </Touchable>
             </Wrapper>
@@ -158,7 +159,7 @@ export const LocationSettings = () => {
           <Collapsible collapsed={showMap}>
             <Wrapper>
               <Button
-                title={texts.settingsContents.locationService.chooseAlternateLocationButton}
+                title={t('settingsContents.locationService.chooseAlternateLocationButton') || texts.settingsContents.locationService.chooseAlternateLocationButton}
                 onPress={() => setShowMap(true)}
               />
             </Wrapper>
@@ -168,6 +169,9 @@ export const LocationSettings = () => {
     </ScrollView>
   );
 };
+
+export const LocationSettings = withTranslation()(LocationSettingsComponent);
+export default LocationSettings;
 
 const styles = StyleSheet.create({
   collapsible: {
